@@ -2,7 +2,12 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
-export default function Button({ text, onPress }) {
+type props = {
+  text: string;
+  onPress: () => void;
+};
+
+export default function Button({ text, onPress }: props) {
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.button}>
