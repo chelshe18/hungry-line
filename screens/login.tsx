@@ -1,11 +1,48 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Image, TextInput, Button } from "react-native";
+import { Formik } from "formik";
+import LoginButton from "../src/button";
+import PasswordButton from "../src/password_button";
+import SignUpButton from "../src/sign_up_button";
 
 export default function Login() {
   return (
     <View style={styles.container}>
-        // TODO
+      <View>
+        <Text style={styles.heading}>Welcome Back!</Text>
+        <Image
+          style={styles.image}
+          source={require("../assets/undraw_breakfast.png")}
+        />
+        <Formik
+          initialValues={{ email: "", password: "" }}
+          onSubmit={(values) => {}}
+        >
+          {(props) => (
+            <View>
+              <TextInput
+                style={styles.input}
+                placeholder="Enter your school email"
+                onChangeText={props.handleChange("email")}
+                value={props.values.email}
+              />
+              <TextInput
+                style={styles.input}
+                placeholder="Enter password"
+                onChangeText={props.handleChange("password")}
+                value={props.values.password}
+              />
+              <PasswordButton onPress={() => {}} />
+              <LoginButton text="Sign In" onPress={() => {}} />
+              <View style={styles.createAccount}>
+                <Text style={styles.text}>Don't have an account?</Text>
+                <SignUpButton onPress={() => {}} />
+              </View>
+            </View>
+          )}
+        </Formik>
+      </View>
     </View>
   );
 }
@@ -13,8 +50,48 @@ export default function Login() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#fff8d6",
     alignItems: "center",
     justifyContent: "center",
+  },
+  heading: {
+    fontWeight: "bold",
+    fontSize: 24,
+    color: "#617a44",
+    padding: 10,
+    textAlign: "center",
+    marginTop: 50,
+  },
+  image: {
+    height: 138,
+    width: 241,
+    padding: 20,
+    margin: 20,
+    alignSelf: "center",
+  },
+  input: {
+    backgroundColor: "#f7e1ae",
+    color: "#393A39",
+    borderColor: "black",
+    padding: 20,
+    fontSize: 16,
+    borderRadius: 15,
+    height: 60,
+    width: 301,
+    textAlign: "left",
+    fontWeight: "bold",
+    marginBottom: 10,
+    marginTop: 10,
+  },
+  text: {
+    color: "#617A55",
+    fontWeight: "bold",
+    fontSize: 15,
+    paddingVertical: 10,
+  },
+  createAccount: {
+    flexDirection: "row",
+    justifyContent: "center",
+    width: 301,
   },
 });
