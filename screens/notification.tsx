@@ -4,6 +4,7 @@ import { TouchableOpacity, StyleSheet, Text, View, Image } from "react-native";
 import Timer from "../components/timer";
 import Ellipse from "../components/ellipse";
 import { Colors } from "react-native/Libraries/NewAppScreen";
+import Button from "../components/button";
 
 export default function Notification() {
     return (
@@ -15,11 +16,8 @@ export default function Notification() {
                 Please arrive within 5 minutes or your
                 position in the queue will be canceled.
             </Text>
-            <Timer/>
-            <TouchableOpacity
-                style={styles.button}
-            ><Text style={styles.textButton}>Cancel</Text>
-            </TouchableOpacity>
+            <Timer />
+            <Button text="Cancel" onPress={() => {}} />
         </View>
     );
 }
@@ -38,15 +36,16 @@ const styles = StyleSheet.create({
 
     midText: {
         color: "#000",
-        lineHeight: 20,
-        //font- family: Poppins;
+        lineHeight: 23,
         fontSize: 16,
         fontStyle: "normal",
         fontWeight: "600",
-        width: 282,
+        width: 275,
         height: 108,
         flexShrink: 0,
         marginTop: 68,
+        marginLeft: 15,
+        marginBottom: 3,
     },
 
     button: {
