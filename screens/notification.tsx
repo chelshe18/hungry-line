@@ -15,7 +15,7 @@ export default function Notification() {
                 Please arrive within 5 minutes or your
                 position in the queue will be canceled.
             </Text>
-            {/* <Timer/> */}
+            <Timer/>
             <TouchableOpacity
                 style={styles.button}
             ><Text style={styles.textButton}>Cancel</Text>
@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
 
     midText: {
         color: "#000",
+        lineHeight: 20,
         //font- family: Poppins;
         fontSize: 16,
         fontStyle: "normal",
@@ -46,7 +47,6 @@ const styles = StyleSheet.create({
         height: 108,
         flexShrink: 0,
         marginTop: 68,
-        // lineHeight: "normal",
     },
 
     button: {
