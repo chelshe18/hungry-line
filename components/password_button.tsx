@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     paddingHorizontal: 5,
     width: 200,
-    paddingBottom: 30,
+    paddingBottom: 50,
     alignSelf: "flex-end",
   },
   buttonText: {
