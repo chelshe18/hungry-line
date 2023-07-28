@@ -1,8 +1,8 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { TouchableOpacity, StyleSheet, Text, View, Image } from "react-native";
-import Timer from "./timer";
-import Ellipse from "./ellipse";
+import Timer from "../components/timer";
+import Ellipse from "../components/ellipse";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 
 export default function Notification() {
