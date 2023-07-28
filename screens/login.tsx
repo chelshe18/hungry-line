@@ -2,9 +2,9 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View, Image, TextInput, Button } from "react-native";
 import { Formik } from "formik";
-import LoginButton from "../src/button";
-import PasswordButton from "../src/password_button";
-import SignUpButton from "../src/sign_up_button";
+import LoginButton from "../components/button";
+import PasswordButton from "../components/password_button";
+import SignUpButton from "../components/sign_up_button";
 
 export default function Login() {
   return (
