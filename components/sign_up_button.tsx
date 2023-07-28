@@ -2,11 +2,11 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
-export default function SignUpButton({ onPress }) {
+export default function SignUpButton({ text, onPress }) {
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.button}>
-        <Text style={styles.buttonText}> Sign Up </Text>
+        <Text style={styles.buttonText}> {text} </Text>
       </View>
     </TouchableOpacity>
   );
