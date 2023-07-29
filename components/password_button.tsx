@@ -2,7 +2,11 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
-export default function PasswordButton({ onPress }) {
+type props = {
+  onPress: () => void;
+};
+
+export default function PasswordButton({ onPress }: props) {
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.button}>
@@ -17,7 +21,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     paddingHorizontal: 5,
     width: 200,
-    paddingBottom: 30,
+    paddingBottom: 50,
     alignSelf: "flex-end",
   },
   buttonText: {
