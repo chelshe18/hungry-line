@@ -5,10 +5,12 @@ import { Formik } from "formik";
 import LoginButton from "../components/button";
 import PasswordButton from "../components/password_button";
 import SignUpButton from "../components/sign_up_button";
+import Ellipse from "../components/ellipse";
 
 export default function Login() {
   return (
     <View style={styles.container}>
+      <Ellipse />
       <View>
         <Text style={styles.heading}>Welcome Back!</Text>
         <Image

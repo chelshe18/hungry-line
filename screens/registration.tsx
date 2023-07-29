@@ -4,10 +4,12 @@ import { StyleSheet, Text, View, Image, TextInput } from "react-native";
 import { Formik } from "formik";
 import Button from "../components/button";
 import SignUpButton from "../components/sign_up_button";
+import Ellipse from "../components/ellipse";
 
 export default function Registration() {
   return (
     <View style={styles.container}>
+      <Ellipse />
       <View>
         <Text style={styles.heading}>Welcome Onboard!</Text>
         <Text style={styles.subtitle}>
