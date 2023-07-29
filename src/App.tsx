@@ -2,12 +2,13 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Notification from "../screens/notification";
-
+import Hungryline from "../screens/hungryline";
 export default function App() {
   return (
-    <View style={styles.container}>
+    <>
       <StatusBar style="auto" />
-    </View>
+      
+    </>
   );
 }
 
