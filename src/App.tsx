@@ -7,17 +7,18 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Notification from "../screens/notification";
 import Hungryline from "../screens/hungryline";
 import Login from "../screens/login";
+import Registration from "../screens/registration";
 
 export type RootStackParamList = {
   Hungryline: undefined;
   Login: undefined;
+  Registration: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
   return (
-    // <Hungryline />
     <NavigationContainer>
       <Stack.Navigator
         initialRouteName="Hungryline"
@@ -25,6 +26,7 @@ export default function App() {
       >
         <Stack.Screen name="Hungryline" component={Hungryline} />
         <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Registration" component={Registration} />
       </Stack.Navigator>
     </NavigationContainer>
   );
