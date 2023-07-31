@@ -3,18 +3,18 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
 import Notification from "../screens/notification";
 import Hungryline from "../screens/hungryline";
 import Login from "../screens/login";
 import Registration from "../screens/registration";
-import Queue_tracking from "../screens/queue_tracking";
 import Waiting_line from "../screens/waiting_line";
-
+import Queuestatus from "../screens/queue_status";
 export type RootStackParamList = {
   Hungryline: undefined;
   Login: undefined;
   Registration: undefined;
+  Queuestatus: undefined;
+  Waiting_line: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -29,6 +29,8 @@ export default function App() {
         <Stack.Screen name="Hungryline" component={Hungryline} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Registration" component={Registration} />
+        <Stack.Screen name="Queuestatus" component={Queuestatus}/>
+        <Stack.Screen name="Waiting_line" component={Waiting_line}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
