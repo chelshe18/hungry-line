@@ -9,6 +9,7 @@ import Login from "../screens/login";
 import Registration from "../screens/registration";
 import Waiting_line from "../screens/waiting_line";
 import Queuestatus from "../screens/queue_status";
+
 export type RootStackParamList = {
   Hungryline: undefined;
   Login: undefined;
