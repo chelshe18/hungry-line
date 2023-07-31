@@ -3,16 +3,27 @@ import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import Ellipse from "../components/ellipse";
 import Button from "../components/button";
+import * as Progress from 'react-native-progress';
 
-export default function Queue_tracking() {
+export default function queue_tracking() {
     return (
         <View style={styles.container}>
             <Ellipse />
             <Text style={styles.title}>Your seat is ready!</Text>
+            <Progress.Bar 
+                progress={1} 
+                width={250} 
+                height={11}
+                style={styles.progressBar} 
+                color={"#A4D0A4"} 
+                borderWidth={4} 
+                borderRadius={10} 
+                unfilledColor={"#617A55"} 
+            />
             <Text style={styles.secretText}>Secret Code: Butter</Text>
             <Text style={styles.midText}> Please show the dinning hall staff
                 this confirmation page and tell them the
-                secret code :&#41; </Text>
+                secret code:D</Text>
 
         </View>
     );
@@ -31,19 +42,23 @@ const styles = StyleSheet.create({
         fontStyle: "normal",
         fontWeight: "600",
         lineHeight: 23,
-
+        marginBottom: 25, 
+    },
+    progressBar: {
+        width: 300,
+        borderRadius: 20,
+        marginBottom: 25, 
     },
     secretText: {
-        color: "#000",
-        textAlign: "center",
-        // fontFamily: Poppins,
+        backgroundColor: "#f7e1ae",
+        color: "#393A39",
+        borderColor: "black",
+        padding: 20,  
         fontSize: 16,
-        fontStyle: "normal",
-        fontWeight: "600",
-        lineHeight: 23,
-        width: 171,
-        height: 24,
-        backgroundColor: "#F7E1AE",
+        lineHeight: 23,  
+        textAlign: 'center',
+        fontWeight: "bold",
+        marginBottom: 30, 
     },
     midText: {
         color: "#000",
