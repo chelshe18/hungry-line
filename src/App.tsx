@@ -7,9 +7,9 @@ import Notification from "../screens/notification";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Queue_tracking />{}
-    </View>
+    
+      <Notification />
+    
   );
 }
 
