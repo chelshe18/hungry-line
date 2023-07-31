@@ -17,7 +17,7 @@ export default function Notification() {
                 position in the queue will be canceled.
             </Text>
             <Timer />
-            <Button text="Cancel" onPress={() => {}} />
+            <Button text="Here" onPress={() => {}} />
         </View>
     );
 }

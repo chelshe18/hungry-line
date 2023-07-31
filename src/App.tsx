@@ -8,6 +8,8 @@ import Notification from "../screens/notification";
 import Hungryline from "../screens/hungryline";
 import Login from "../screens/login";
 import Registration from "../screens/registration";
+import Queue_tracking from "../screens/queue_tracking";
+import Waiting_line from "../screens/waiting_line";
 
 export type RootStackParamList = {
   Hungryline: undefined;
@@ -40,3 +42,4 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+
