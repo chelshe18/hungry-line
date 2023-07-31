@@ -5,7 +5,8 @@ import Ellipse from "../components/ellipse";
 import Button from "../components/button";
 import * as Progress from 'react-native-progress';
 
-export default function queue_tracking() {
+
+export default function Queue_tracking() {
     return (
         <View style={styles.container}>
             <Ellipse />

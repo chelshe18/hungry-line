@@ -1,10 +1,13 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../src/App";
 import Ellipse from "../components/ellipse";
 import * as Progress from 'react-native-progress';
 import Button from "../components/button";
 
+type Waiting_line_props = NativeStackScreenProps<RootStackParamList, "Waiting_line">;
 export default function Waiting_line(){
     const totalPeople = 20;  // total number of people in the queue
     const waitingPeople = 5;  // people ahead of you
