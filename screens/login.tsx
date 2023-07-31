@@ -1,13 +1,17 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View, Image, TextInput, Button } from "react-native";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../src/App";
 import { Formik } from "formik";
 import LoginButton from "../components/button";
 import PasswordButton from "../components/password_button";
 import SignUpButton from "../components/sign_up_button";
 import Ellipse from "../components/ellipse";
 
-export default function Login() {
+type LoginProps = NativeStackScreenProps<RootStackParamList, "Login">;
+
+export default function Login({ navigation }: LoginProps) {
   return (
     <View style={styles.container}>
       <Ellipse />
@@ -39,7 +43,12 @@ export default function Login() {
               <LoginButton text="Sign In" onPress={() => {}} />
               <View style={styles.createAccount}>
                 <Text style={styles.text}>Don't have an account?</Text>
-                <SignUpButton text="Sign Up" onPress={() => {}} />
+                <SignUpButton
+                  text="Sign Up"
+                  onPress={() => {
+                    navigation.navigate("Registration");
+                  }}
+                />
               </View>
             </View>
           )}

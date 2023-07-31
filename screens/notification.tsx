@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { TouchableOpacity, StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
 import Timer from "../components/timer";
 import Ellipse from "../components/ellipse";
 import { Colors } from "react-native/Libraries/NewAppScreen";

@@ -2,11 +2,18 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View, Image, TextInput } from "react-native";
 import { Formik } from "formik";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../src/App";
 import Button from "../components/button";
 import SignUpButton from "../components/sign_up_button";
 import Ellipse from "../components/ellipse";
 
-export default function Registration() {
+type RegistrationProps = NativeStackScreenProps<
+  RootStackParamList,
+  "Registration"
+>;
+
+export default function Registration({ navigation }: RegistrationProps) {
   return (
     <View style={styles.container}>
       <Ellipse />
@@ -44,7 +51,12 @@ export default function Registration() {
               <Button text="Register" onPress={() => {}} />
               <View style={styles.createAccount}>
                 <Text style={styles.text}>Already have an account?</Text>
-                <SignUpButton text="Sign In" onPress={() => {}} />
+                <SignUpButton
+                  text="Sign In"
+                  onPress={() => {
+                    navigation.pop();
+                  }}
+                />
               </View>
             </View>
           )}
