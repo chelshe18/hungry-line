@@ -48,7 +48,12 @@ export default function Registration({ navigation }: RegistrationProps) {
               />
               <TextInput style={styles.input} placeholder="Confirm password" />
               <Text style={styles.subtitle}></Text>
-              <Button text="Register" onPress={() => {}} />
+              <Button
+                text="Register"
+                onPress={() => {
+                  navigation.navigate("Dining");
+                }}
+              />
               <View style={styles.createAccount}>
                 <Text style={styles.text}>Already have an account?</Text>
                 <SignUpButton
