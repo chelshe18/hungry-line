@@ -7,7 +7,7 @@ import Notification from "../screens/notification";
 import Hungryline from "../screens/hungryline";
 import Login from "../screens/login";
 import Registration from "../screens/registration";
-import Waiting_line from "../screens/waiting_line";
+import WaitingLine from "../screens/waiting_line";
 import Queuestatus from "../screens/queue_status";
 import Dining from "../screens/dining";
 
@@ -16,7 +16,7 @@ export type RootStackParamList = {
   Login: undefined;
   Registration: undefined;
   Queuestatus: undefined;
-  Waiting_line: undefined;
+  WaitingLine: undefined;
   Dining: undefined;
 };
 
@@ -34,7 +34,7 @@ export default function App() {
         <Stack.Screen name="Registration" component={Registration} />
         <Stack.Screen name="Dining" component={Dining} />
         <Stack.Screen name="Queuestatus" component={Queuestatus} />
-        <Stack.Screen name="Waiting_line" component={Waiting_line} />
+        <Stack.Screen name="WaitingLine" component={WaitingLine} />
       </Stack.Navigator>
     </NavigationContainer>
   );
