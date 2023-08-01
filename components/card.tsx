@@ -44,12 +44,13 @@ export default function Card({ name, open, time, image, onPress }: props) {
       <View style={styles.cardBody}>
         <View style={{ flexDirection: "row" }}>
           <Text style={styles.cardTitle}>{name}</Text>
+          <View style={{ flex: 1 }} />
           <View style={{ flexDirection: "row", paddingVertical: 1 }}>
             <Text style={styles.distanceLabel}>Dist. </Text>
             <Text style={styles.distance}>0.2 mi</Text>
           </View>
         </View>
-        <Text style={styles.cardLabel}>
+        <Text style={styles.timeLabel}>
           {open ? "Open" : "Closed"} until {time}
         </Text>
       </View>
@@ -89,7 +90,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 4,
   },
-  cardLabel: {
+  timeLabel: {
     color: "#000000",
     fontSize: 12,
     marginBottom: 6,
@@ -105,7 +106,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: "600",
     color: "#000",
-    marginLeft: 45, // Fix alignment of distance info
   },
   heart: {
     position: "absolute",
