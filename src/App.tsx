@@ -9,6 +9,7 @@ import Login from "../screens/login";
 import Registration from "../screens/registration";
 import Waiting_line from "../screens/waiting_line";
 import Queuestatus from "../screens/queue_status";
+import Dining from "../screens/dining";
 
 export type RootStackParamList = {
   Hungryline: undefined;
@@ -16,6 +17,7 @@ export type RootStackParamList = {
   Registration: undefined;
   Queuestatus: undefined;
   Waiting_line: undefined;
+  Dining: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -30,8 +32,9 @@ export default function App() {
         <Stack.Screen name="Hungryline" component={Hungryline} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Registration" component={Registration} />
-        <Stack.Screen name="Queuestatus" component={Queuestatus}/>
-        <Stack.Screen name="Waiting_line" component={Waiting_line}/>
+        <Stack.Screen name="Dining" component={Dining} />
+        <Stack.Screen name="Queuestatus" component={Queuestatus} />
+        <Stack.Screen name="Waiting_line" component={Waiting_line} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -45,4 +48,3 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
-

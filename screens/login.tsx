@@ -40,7 +40,12 @@ export default function Login({ navigation }: LoginProps) {
                 value={props.values.password}
               />
               <PasswordButton onPress={() => {}} />
-              <LoginButton text="Sign In" onPress={() => {}} />
+              <LoginButton
+                text="Sign In"
+                onPress={() => {
+                  navigation.navigate("Dining");
+                }}
+              />
               <View style={styles.createAccount}>
                 <Text style={styles.text}>Don't have an account?</Text>
                 <SignUpButton
