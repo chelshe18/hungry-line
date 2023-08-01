@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "#a2cea2",
-    fontWeight: "bold",
+    fontFamily: "poppins-semibold",
     fontSize: 15,
     textAlign: "right",
     textAlignVertical: "center",

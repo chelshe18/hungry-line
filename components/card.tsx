@@ -37,7 +37,13 @@ export default function Card({ name, open, time, image, onPress }: props) {
               : require("../assets/clock_closed.png")
           }
         />
-        <Text style={{ fontWeight: "600", fontSize: 11, marginVertical: 3 }}>
+        <Text
+          style={{
+            fontFamily: "poppins-regular",
+            fontSize: 11,
+            marginVertical: 3,
+          }}
+        >
           {open ? "  Open" : " Closed"}
         </Text>
       </View>
@@ -45,7 +51,7 @@ export default function Card({ name, open, time, image, onPress }: props) {
         <View style={{ flexDirection: "row" }}>
           <Text style={styles.cardTitle}>{name}</Text>
           <View style={{ flex: 1 }} />
-          <View style={{ flexDirection: "row", paddingVertical: 1 }}>
+          <View style={{ flexDirection: "row", paddingVertical: 2 }}>
             <Text style={styles.distanceLabel}>Dist. </Text>
             <Text style={styles.distance}>0.2 mi</Text>
           </View>
@@ -87,24 +93,23 @@ const styles = StyleSheet.create({
   cardTitle: {
     color: "#000000",
     fontSize: 14,
-    fontWeight: "bold",
-    marginBottom: 4,
+    fontFamily: "poppins-semibold",
+    marginBottom: 3,
   },
   timeLabel: {
     color: "#000000",
     fontSize: 12,
+    fontFamily: "poppins-regular",
     marginBottom: 6,
-    fontWeight: "600",
-    paddingVertical: 5,
   },
   distance: {
     fontSize: 12,
-    fontWeight: "600",
+    fontFamily: "poppins-regular",
     color: "#617A55",
   },
   distanceLabel: {
     fontSize: 12,
-    fontWeight: "600",
+    fontFamily: "poppins-regular",
     color: "#000",
   },
   heart: {
@@ -121,7 +126,7 @@ const styles = StyleSheet.create({
     left: 12,
     zIndex: 2,
     backgroundColor: "#F7E1AE",
-    width: 62,
+    width: 66,
     height: 22,
     borderRadius: 15,
     flexDirection: "row",

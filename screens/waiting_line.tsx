@@ -57,11 +57,11 @@ const styles = StyleSheet.create({
 
   title: {
     color: "#000",
-    fontSize: 20,
+    fontSize: 17,
     fontStyle: "normal",
-    fontWeight: "600",
+    fontFamily: "poppins-semibold",
     lineHeight: 23,
-    marginBottom: 25,
+    marginBottom: 22,
   },
 
   progressBar: {
@@ -75,18 +75,18 @@ const styles = StyleSheet.create({
     color: "#000",
     padding: 15,
     textAlign: "center",
-    fontSize: 16,
+    fontSize: 15,
     fontStyle: "normal",
-    fontWeight: "600",
+    fontFamily: "poppins-semibold",
     lineHeight: 23,
     marginBottom: 30,
+    borderRadius: 15,
   },
 
   dynamicText: {
     color: "#617A55",
-    fontWeight: "600",
-    fontSize: 16,
-    //fontFamily: "Poppins",
+    fontSize: 15,
+    fontFamily: "poppins-semibold",
   },
 
   image: {

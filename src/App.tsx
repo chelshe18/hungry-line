@@ -10,8 +10,9 @@ import Hungryline from "../screens/hungryline";
 import Login from "../screens/login";
 import Registration from "../screens/registration";
 import WaitingLine from "../screens/waiting_line";
-import Queuestatus from "../screens/queue_status";
+import QueueStatus from "../screens/queue_status";
 import Dining from "../screens/dining";
+import QueueTracking from "../screens/queue_tracking";
 
 //SplashScreen.preventAutoHideAsync();
 
@@ -19,9 +20,11 @@ export type RootStackParamList = {
   Hungryline: undefined;
   Login: undefined;
   Registration: undefined;
-  Queuestatus: undefined;
+  QueueStatus: undefined;
   WaitingLine: undefined;
   Dining: undefined;
+  Notification: undefined;
+  QueueTracking: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -72,8 +75,10 @@ export default function App() {
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Registration" component={Registration} />
         <Stack.Screen name="Dining" component={Dining} />
-        <Stack.Screen name="Queuestatus" component={Queuestatus} />
+        <Stack.Screen name="QueueStatus" component={QueueStatus} />
         <Stack.Screen name="WaitingLine" component={WaitingLine} />
+        <Stack.Screen name="Notification" component={Notification} />
+        <Stack.Screen name="QueueTracking" component={QueueTracking} />
       </Stack.Navigator>
     </NavigationContainer>
   );
