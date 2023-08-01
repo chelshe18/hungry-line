@@ -1,9 +1,13 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../src/App";
 import { StyleSheet, Text, View, Image } from "react-native";
 import Card from "../components/card";
 
-export default function Dining() {
+type DiningProps = NativeStackScreenProps<RootStackParamList, "Dining">;
+
+export default function Dining({ navigation }: DiningProps) {
   return (
     <View style={styles.container}>
       <View style={styles.top}></View>
@@ -11,8 +15,9 @@ export default function Dining() {
         <Card
           name="Community Dining Center"
           time="9pm"
-          open={true}
+          open={false}
           image={require("../assets/dining_hall_1.jpg")}
+          onPress={() => navigation.navigate("WaitingLine")}
         />
       </View>
     </View>
