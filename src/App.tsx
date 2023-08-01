@@ -9,6 +9,7 @@ import Login from "../screens/login";
 import Registration from "../screens/registration";
 import Waiting_line from "../screens/waiting_line";
 import Queuestatus from "../screens/queue_status";
+import Dining from "../screens/dining";
 
 export type RootStackParamList = {
   Hungryline: undefined;
@@ -22,18 +23,19 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Hungryline"
-        screenOptions={{ headerShown: false }}
-      >
-        <Stack.Screen name="Hungryline" component={Hungryline} />
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Registration" component={Registration} />
-        <Stack.Screen name="Queuestatus" component={Queuestatus}/>
-        <Stack.Screen name="Waiting_line" component={Waiting_line}/>
-      </Stack.Navigator>
-    </NavigationContainer>
+    // <NavigationContainer>
+    //   <Stack.Navigator
+    //     initialRouteName="Hungryline"
+    //     screenOptions={{ headerShown: false }}
+    //   >
+    //     <Stack.Screen name="Hungryline" component={Hungryline} />
+    //     <Stack.Screen name="Login" component={Login} />
+    //     <Stack.Screen name="Registration" component={Registration} />
+    //     <Stack.Screen name="Queuestatus" component={Queuestatus}/>
+    //     <Stack.Screen name="Waiting_line" component={Waiting_line}/>
+    //   </Stack.Navigator>
+    // </NavigationContainer>
+    <Dining />
   );
 }
 
