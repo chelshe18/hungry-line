@@ -17,7 +17,7 @@ export default function Dining({ navigation }: DiningProps) {
           time="9pm"
           open={false}
           image={require("../assets/dining_hall_1.jpg")}
-          onPress={() => navigation.navigate("Notification")}
+          onPress={() => navigation.navigate("QueueStatus")}
         />
       </View>
     </View>

@@ -43,7 +43,7 @@ export default function QueueStatus({ navigation }: QueueStatusProps) {
       <Button
         text="Switch Dining Halls"
         onPress={() => {
-          navigation.navigate("Dining");
+          navigation.pop();
         }}
       />
     </View>
