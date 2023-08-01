@@ -6,9 +6,10 @@ type props = {
   open: boolean;
   time: string;
   image: any;
+  onPress: () => void;
 };
 
-export default function Card({ name, open, time, image }: props) {
+export default function Card({ name, open, time, image, onPress }: props) {
   const [favorited, setFavorited] = useState(false);
 
   const handleFavorite = () => {
@@ -16,7 +17,7 @@ export default function Card({ name, open, time, image }: props) {
   };
 
   return (
-    <View style={styles.card}>
+    <TouchableOpacity style={styles.card} onPress={onPress}>
       <Image style={styles.cardImage} source={image} />
       <TouchableOpacity style={styles.heart} onPress={handleFavorite}>
         <Image
@@ -27,6 +28,19 @@ export default function Card({ name, open, time, image }: props) {
           }
         />
       </TouchableOpacity>
+      <View style={styles.openStatus}>
+        <Image
+          style={styles.clockIcon}
+          source={
+            open
+              ? require("../assets/clock_open.png")
+              : require("../assets/clock_closed.png")
+          }
+        />
+        <Text style={{ fontWeight: "600", fontSize: 11, marginVertical: 3 }}>
+          {open ? "  Open" : " Closed"}
+        </Text>
+      </View>
       <View style={styles.cardBody}>
         <View style={{ flexDirection: "row" }}>
           <Text style={styles.cardTitle}>{name}</Text>
@@ -39,7 +53,7 @@ export default function Card({ name, open, time, image }: props) {
           {open ? "Open" : "Closed"} until {time}
         </Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 
@@ -100,5 +114,22 @@ const styles = StyleSheet.create({
     zIndex: 2,
     top: 15,
     left: 263,
+  },
+  openStatus: {
+    position: "absolute",
+    top: 12,
+    left: 12,
+    zIndex: 2,
+    backgroundColor: "#F7E1AE",
+    width: 62,
+    height: 22,
+    borderRadius: 15,
+    flexDirection: "row",
+  },
+  clockIcon: {
+    marginTop: 3.5,
+    marginLeft: 3.5,
+    height: 15,
+    width: 15,
   },
 });
