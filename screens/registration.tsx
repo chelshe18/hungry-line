@@ -48,7 +48,12 @@ export default function Registration({ navigation }: RegistrationProps) {
               />
               <TextInput style={styles.input} placeholder="Confirm password" />
               <Text style={styles.subtitle}></Text>
-              <Button text="Register" onPress={() => {}} />
+              <Button
+                text="Register"
+                onPress={() => {
+                  navigation.navigate("Dining");
+                }}
+              />
               <View style={styles.createAccount}>
                 <Text style={styles.text}>Already have an account?</Text>
                 <SignUpButton
@@ -74,7 +79,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   heading: {
-    fontWeight: "bold",
+    fontFamily: "poppins-bold",
     fontSize: 24,
     color: "#617a44",
     padding: 8,
@@ -84,7 +89,7 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: 13,
     textAlign: "center",
-    fontWeight: "500",
+    fontFamily: "poppins-semibold",
     color: "#617a55",
     marginBottom: 20,
   },
@@ -92,20 +97,21 @@ const styles = StyleSheet.create({
     backgroundColor: "#f7e1ae",
     color: "#393A39",
     borderColor: "black",
-    padding: 20,
-    fontSize: 16,
+    paddingHorizontal: 20,
+    fontSize: 14,
     borderRadius: 15,
     height: 60,
     width: 301,
     textAlign: "left",
-    fontWeight: "bold",
+    textAlignVertical: "center",
+    fontFamily: "poppins-regular",
     marginBottom: 5,
     marginTop: 5,
   },
   text: {
     color: "#617A55",
-    fontWeight: "bold",
-    fontSize: 15,
+    fontFamily: "poppins-semibold",
+    fontSize: 14,
     paddingVertical: 10,
   },
   createAccount: {

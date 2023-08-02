@@ -5,8 +5,13 @@ import Yellow from "../components/yellow_ellipse";
 import Filter from "../components/filter_button";
 import { SearchBar } from "react-native-screens";
 import FilterComponent from "../components/filter_compon";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../src/App";
+import Card from "../components/card";
 
-export default function Dining(this: any) {
+type DiningProps = NativeStackScreenProps<RootStackParamList, "Dining">;
+
+export default function Dining({ navigation }: DiningProps) {
     return (
         <View style={styles.container}>
             <View style={styles.top}>
@@ -23,6 +28,13 @@ export default function Dining(this: any) {
                     <Image source={require("../assets/searchpic.png")} />
 
                     {/* </SearchBar> */}
+                   <Card
+            name="Community Dining Center"
+          time="9pm"
+          open={false}
+          image={require("../assets/dining_hall_1.jpg")}
+          onPress={() => navigation.navigate("QueueStatus")}
+        />
                 </View>
                 <Filter />
                 {/* <FilterComponent /> */}
@@ -78,3 +90,4 @@ const styles = StyleSheet.create({
         height: 30,
     },
 })
+
