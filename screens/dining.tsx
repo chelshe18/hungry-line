@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import Yellow from "../components/yellow_ellipse";
 import Filter from "../components/filter_button";
@@ -20,12 +20,12 @@ export default function Dining(this: any) {
                         placeholder="Search Dining and Menus"
                         onChangeText={this.updateSearch}
                         value={search}> */}
-                        <Image source={require("../assets/searchpic.png")} />
+                    <Image source={require("../assets/searchpic.png")} />
 
                     {/* </SearchBar> */}
                 </View>
                 <Filter />
-                <FilterComponent />
+                {/* <FilterComponent /> */}
             </View>
         </View >
     )

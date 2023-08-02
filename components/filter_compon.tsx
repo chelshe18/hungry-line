@@ -6,9 +6,14 @@ export default function FilterComponent() {
     return (
         <View style={styles.filter}>
             <View style={styles.filterContainer}>
-                <Text style={styles.FilterComponentText}>X</Text>
-                <Text style={styles.FilterComponentText}>Filter</Text>
-                <Text style={styles.FilterComponentText}>Clear</Text>
+                <TouchableOpacity>
+                    <Text style={styles.FilterComponentText}>X</Text>
+                </TouchableOpacity>
+                    <Text style={styles.FilterComponentText}>Filter</Text>
+                <TouchableOpacity>
+                    <Text style={styles.FilterComponentText}>Clear</Text>
+                </TouchableOpacity>
+
             </View>
             <View style={styles.buttonContainer}>
                 <Checkbox />
@@ -27,10 +32,10 @@ const styles = StyleSheet.create({
     filter: {
         borderRadius: 15,
         backgroundColor: "#F7E1AE",
-        height: "50%",
         display: "flex",
         width: "100%",
         position: "absolute",
+        flex: 1,
         bottom: 0,
     },
 
@@ -55,15 +60,15 @@ const styles = StyleSheet.create({
     },
 
     buttonContainer: {
-        alignItems: "center", // Center the button horizontally in the container
-        // paddingBottom: 16, 
+        alignItems: "center",
+        paddingBottom: 16,
     },
 
     button: {
         borderRadius: 15,
-        paddingHorizontal: 130, // Increase padding to make the button wider
-        paddingVertical: 13, // Adjust as needed
-        backgroundColor: "#a2cea2", // Add a background color to the button
+        paddingHorizontal: 130,
+        paddingVertical: 13,
+        backgroundColor: "#a2cea2",
     },
 
     buttonText: {
