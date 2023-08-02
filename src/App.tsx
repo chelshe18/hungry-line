@@ -9,7 +9,7 @@ import Notification from "../screens/notification";
 import Hungryline from "../screens/hungryline";
 import Login from "../screens/login";
 import Registration from "../screens/registration";
-import WaitingLine from "../screens/waiting_line";
+import Waiting_line from "../screens/waiting_line";
 import QueueStatus from "../screens/queue_status";
 import Dining from "../screens/dining";
 import QueueTracking from "../screens/queue_tracking";
@@ -66,6 +66,7 @@ export default function App() {
   }
 
   return (
+
     <NavigationContainer>
       <Stack.Navigator
         initialRouteName="Hungryline"
