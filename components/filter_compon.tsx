@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, Image, View, Text, TouchableOpacity } from "react-native";
+import Checkbox from "./checkbox";
 
 export default function FilterComponent() {
     return (
@@ -10,6 +11,7 @@ export default function FilterComponent() {
                 <Text style={styles.FilterComponentText}>Clear</Text>
             </View>
             <View style={styles.buttonContainer}>
+                <Checkbox />
                 <TouchableOpacity>
                     <View style={styles.button}>
                         <Text style={styles.buttonText}>Done</Text>
@@ -47,6 +49,9 @@ const styles = StyleSheet.create({
         lineHeight: 23,
         fontSize: 19,
         justifyContent: "space-between",
+        marginLeft: 15,
+        marginRight: 15,
+        marginTop: 13,
     },
 
     buttonContainer: {

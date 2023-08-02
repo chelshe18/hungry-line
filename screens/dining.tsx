@@ -6,7 +6,7 @@ import Filter from "../components/filter_button";
 import { SearchBar } from "react-native-screens";
 import FilterComponent from "../components/filter_compon";
 
-export default function Dining() {
+export default function Dining(this: any) {
     return (
         <View style={styles.container}>
             <View style={styles.top}>
@@ -16,13 +16,18 @@ export default function Dining() {
             </View>
             <View style={styles.bottom}>
                 <View style={styles.searchBarContainer}>
-                    <Image source={require("../assets/searchpic.png")} />
-                    <Text>Search Dining and Menus</Text>
+                    {/* <SearchBar
+                        placeholder="Search Dining and Menus"
+                        onChangeText={this.updateSearch}
+                        value={search}> */}
+                        <Image source={require("../assets/searchpic.png")} />
+
+                    {/* </SearchBar> */}
                 </View>
                 <Filter />
                 <FilterComponent />
             </View>
-        </View>
+        </View >
     )
 }
 
