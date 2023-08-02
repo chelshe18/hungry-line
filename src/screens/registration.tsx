@@ -1,32 +1,39 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View, Image, TextInput, Button } from "react-native";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../src/App";
+import { StyleSheet, Text, View, Image, TextInput } from "react-native";
 import { Formik } from "formik";
-import LoginButton from "../components/button";
-import PasswordButton from "../components/password_button";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../App";
+import Button from "../components/button";
 import SignUpButton from "../components/sign_up_button";
 import Ellipse from "../components/ellipse";
 
-type LoginProps = NativeStackScreenProps<RootStackParamList, "Login">;
+type RegistrationProps = NativeStackScreenProps<
+  RootStackParamList,
+  "Registration"
+>;
 
-export default function Login({ navigation }: LoginProps) {
+export default function Registration({ navigation }: RegistrationProps) {
   return (
     <View style={styles.container}>
       <Ellipse />
       <View>
-        <Text style={styles.heading}>Welcome Back!</Text>
-        <Image
-          style={styles.image}
-          source={require("../assets/undraw_breakfast.png")}
-        />
+        <Text style={styles.heading}>Welcome Onboard!</Text>
+        <Text style={styles.subtitle}>
+          Let's help you get into the dining queue
+        </Text>
         <Formik
-          initialValues={{ email: "", password: "" }}
+          initialValues={{ name: "", email: "", password: "" }}
           onSubmit={(values) => {}}
         >
           {(props) => (
             <View>
+              <TextInput
+                style={styles.input}
+                placeholder="Enter your full name"
+                onChangeText={props.handleChange("name")}
+                value={props.values.name}
+              />
               <TextInput
                 style={styles.input}
                 placeholder="Enter your school email"
@@ -39,19 +46,20 @@ export default function Login({ navigation }: LoginProps) {
                 onChangeText={props.handleChange("password")}
                 value={props.values.password}
               />
-              <PasswordButton onPress={() => {}} />
-              <LoginButton
-                text="Sign In"
+              <TextInput style={styles.input} placeholder="Confirm password" />
+              <Text style={styles.subtitle}></Text>
+              <Button
+                text="Register"
                 onPress={() => {
                   navigation.navigate("Dining");
                 }}
               />
               <View style={styles.createAccount}>
-                <Text style={styles.text}>Don't have an account?</Text>
+                <Text style={styles.text}>Already have an account?</Text>
                 <SignUpButton
-                  text="Sign Up"
+                  text="Sign In"
                   onPress={() => {
-                    navigation.navigate("Registration");
+                    navigation.pop();
                   }}
                 />
               </View>
@@ -71,19 +79,19 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   heading: {
+    fontFamily: "poppins-bold",
     fontSize: 24,
     color: "#617a44",
-    padding: 10,
+    padding: 8,
     textAlign: "center",
     marginTop: 50,
-    fontFamily: "poppins-bold",
   },
-  image: {
-    height: 138,
-    width: 241,
-    padding: 20,
-    margin: 20,
-    alignSelf: "center",
+  subtitle: {
+    fontSize: 13,
+    textAlign: "center",
+    fontFamily: "poppins-semibold",
+    color: "#617a55",
+    marginBottom: 20,
   },
   input: {
     backgroundColor: "#f7e1ae",

@@ -5,14 +5,14 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as Font from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-import Notification from "../screens/notification";
-import Hungryline from "../screens/hungryline";
-import Login from "../screens/login";
-import Registration from "../screens/registration";
-import WaitingLine from "../screens/waiting_line";
-import QueueStatus from "../screens/queue_status";
-import Dining from "../screens/dining";
-import QueueTracking from "../screens/queue_tracking";
+import Notification from "./screens/notification";
+import Hungryline from "./screens/hungryline";
+import Login from "./screens/login";
+import Registration from "./screens/registration";
+import WaitingLine from "./screens/waiting_line";
+import QueueStatus from "./screens/queue_status";
+import Dining from "./screens/dining";
+import QueueTracking from "./screens/queue_tracking";
 
 //SplashScreen.preventAutoHideAsync();
 
@@ -31,12 +31,12 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const getFonts = () =>
   Font.loadAsync({
-    "poppins-regular": require("../assets/fonts/Poppins-Regular.ttf"),
-    "poppins-bold": require("../assets/fonts/Poppins-Bold.ttf"),
-    "poppins-extrabold": require("../assets/fonts/Poppins-ExtraBold.ttf"),
-    "poppins-light": require("../assets/fonts/Poppins-Light.ttf"),
-    "poppins-medium": require("../assets/fonts/Poppins-Medium.ttf"),
-    "poppins-semibold": require("../assets/fonts/Poppins-SemiBold.ttf"),
+    "poppins-regular": require("./assets/fonts/Poppins-Regular.ttf"),
+    "poppins-bold": require("./assets/fonts/Poppins-Bold.ttf"),
+    "poppins-extrabold": require("./assets/fonts/Poppins-ExtraBold.ttf"),
+    "poppins-light": require("./assets/fonts/Poppins-Light.ttf"),
+    "poppins-medium": require("./assets/fonts/Poppins-Medium.ttf"),
+    "poppins-semibold": require("./assets/fonts/Poppins-SemiBold.ttf"),
   });
 
 export default function App() {

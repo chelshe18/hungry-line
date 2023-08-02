@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../src/App";
+import { RootStackParamList } from "../App";
 import Ellipse from "../components/ellipse";
 import Button from "../components/button";
 
