@@ -1,7 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../src/App";
+import { RootStackParamList } from "../App";
 import { StyleSheet, Text, View, Image } from "react-native";
 import Card from "../components/card";
 

@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../src/App";
+import { RootStackParamList } from "../App";
 import Timer from "../components/timer";
 import Ellipse from "../components/ellipse";
 import { Colors } from "react-native/Libraries/NewAppScreen";
@@ -23,7 +23,12 @@ export default function Notification({ navigation }: NotificationProps) {
         your position in the queue will be canceled.
       </Text>
       <Timer />
-      <Button text="Here" onPress={() => {navigation.navigate("QueueTracking")}} />
+      <Button
+        text="Here"
+        onPress={() => {
+          navigation.navigate("QueueTracking");
+        }}
+      />
     </View>
   );
 }
