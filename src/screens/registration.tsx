@@ -7,6 +7,8 @@ import { RootStackParamList } from "../App";
 import Button from "../components/button";
 import SignUpButton from "../components/sign_up_button";
 import Ellipse from "../components/ellipse";
+import { FIREBASE_AUTH } from "../../firebase.config";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 type RegistrationProps = NativeStackScreenProps<
   RootStackParamList,
@@ -14,6 +16,17 @@ type RegistrationProps = NativeStackScreenProps<
 >;
 
 export default function Registration({ navigation }: RegistrationProps) {
+  const auth = FIREBASE_AUTH;
+
+  async function signUp(values: any) {
+    try {
+      await createUserWithEmailAndPassword(auth, values.email, values.password);
+      navigation.navigate("Dining");
+    } catch (error) {
+      console.log("Sign Up Error: " + error);
+    }
+  }
+
   return (
     <View style={styles.container}>
       <Ellipse />
@@ -24,7 +37,9 @@ export default function Registration({ navigation }: RegistrationProps) {
         </Text>
         <Formik
           initialValues={{ name: "", email: "", password: "" }}
-          onSubmit={(values) => {}}
+          onSubmit={(values) => {
+            signUp(values);
+          }}
         >
           {(props) => (
             <View>
@@ -41,19 +56,19 @@ export default function Registration({ navigation }: RegistrationProps) {
                 value={props.values.email}
               />
               <TextInput
+                secureTextEntry={true}
                 style={styles.input}
                 placeholder="Enter password"
                 onChangeText={props.handleChange("password")}
                 value={props.values.password}
               />
-              <TextInput style={styles.input} placeholder="Confirm password" />
-              <Text style={styles.subtitle}></Text>
-              <Button
-                text="Register"
-                onPress={() => {
-                  navigation.navigate("Dining");
-                }}
+              <TextInput
+                secureTextEntry={true}
+                style={styles.input}
+                placeholder="Confirm password"
               />
+              <Text style={styles.subtitle}></Text>
+              <Button text="Register" onPress={props.handleSubmit} />
               <View style={styles.createAccount}>
                 <Text style={styles.text}>Already have an account?</Text>
                 <SignUpButton

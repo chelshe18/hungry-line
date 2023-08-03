@@ -8,10 +8,23 @@ import LoginButton from "../components/button";
 import PasswordButton from "../components/password_button";
 import SignUpButton from "../components/sign_up_button";
 import Ellipse from "../components/ellipse";
+import { FIREBASE_AUTH } from "../../firebase.config";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 type LoginProps = NativeStackScreenProps<RootStackParamList, "Login">;
 
 export default function Login({ navigation }: LoginProps) {
+  const auth = FIREBASE_AUTH;
+
+  async function signIn(values: any) {
+    try {
+      await signInWithEmailAndPassword(auth, values.email, values.password);
+      navigation.navigate("Dining");
+    } catch (error) {
+      console.log("Sign In Error: " + error);
+    }
+  }
+
   return (
     <View style={styles.container}>
       <Ellipse />
@@ -23,7 +36,9 @@ export default function Login({ navigation }: LoginProps) {
         />
         <Formik
           initialValues={{ email: "", password: "" }}
-          onSubmit={(values) => {}}
+          onSubmit={(values) => {
+            signIn(values);
+          }}
         >
           {(props) => (
             <View>
@@ -34,18 +49,14 @@ export default function Login({ navigation }: LoginProps) {
                 value={props.values.email}
               />
               <TextInput
+                secureTextEntry={true}
                 style={styles.input}
                 placeholder="Enter password"
                 onChangeText={props.handleChange("password")}
                 value={props.values.password}
               />
               <PasswordButton onPress={() => {}} />
-              <LoginButton
-                text="Sign In"
-                onPress={() => {
-                  navigation.navigate("Dining");
-                }}
-              />
+              <LoginButton text="Sign In" onPress={props.handleSubmit} />
               <View style={styles.createAccount}>
                 <Text style={styles.text}>Don't have an account?</Text>
                 <SignUpButton
