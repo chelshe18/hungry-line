@@ -22,8 +22,23 @@ export default function Registration({ navigation }: RegistrationProps) {
     try {
       await createUserWithEmailAndPassword(auth, values.email, values.password);
       navigation.navigate("Dining");
-    } catch (error) {
-      console.log("Sign Up Error: " + error);
+    } catch (error: any) {
+      switch (error.code) {
+        case "auth/invalid-email":
+          alert("Not a valid email address.");
+          break;
+        case "auth/email-already-in-use":
+          alert("This email address is already in use.");
+          break;
+        case "auth/operation-not-allowed":
+          alert("Signing in with email and password is not allowed.");
+          break;
+        case "auth/weak-password":
+          alert("Password is not strong enough.");
+          break;
+        default:
+          alert("An undefined Error happened.");
+      }
     }
   }
 

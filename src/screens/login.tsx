@@ -20,8 +20,23 @@ export default function Login({ navigation }: LoginProps) {
     try {
       await signInWithEmailAndPassword(auth, values.email, values.password);
       navigation.navigate("Dining");
-    } catch (error) {
-      console.log("Sign In Error: " + error);
+    } catch (error: any) {
+      switch (error.code) {
+        case "auth/invalid-email":
+          alert("Not a valid email address.");
+          break;
+        case "auth/wrong-password":
+          alert("Wrong password.");
+          break;
+        case "auth/user-not-found":
+          alert("User with this email doesn't exist.");
+          break;
+        case "auth/user-disabled":
+          alert("User with this email has been disabled.");
+          break;
+        default:
+          alert("An undefined Error happened.");
+      }
     }
   }
 
