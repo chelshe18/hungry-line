@@ -5,6 +5,7 @@ export default function Timer() {
     return (
         <CountDown 
             size={30}
+            until={60*5}
             digitStyle={{ backgroundColor: '#FFF8D6', margin: 0, padding: 0,}}
             showSeparator
             digitTxtStyle={{ color: '#617A55', marginBottom: 8,}}
