@@ -16,29 +16,30 @@ type LoginProps = NativeStackScreenProps<RootStackParamList, "Login">;
 export default function Login({ navigation }: LoginProps) {
   const auth = FIREBASE_AUTH;
 
-  async function signIn(values: any) {
-    try {
-      await signInWithEmailAndPassword(auth, values.email, values.password);
-      navigation.navigate("Dining");
-    } catch (error: any) {
-      switch (error.code) {
-        case "auth/invalid-email":
-          alert("Not a valid email address.");
-          break;
-        case "auth/wrong-password":
-          alert("Wrong password.");
-          break;
-        case "auth/user-not-found":
-          alert("User with this email doesn't exist.");
-          break;
-        case "auth/user-disabled":
-          alert("User with this email has been disabled.");
-          break;
-        default:
-          alert("An undefined Error happened.");
-      }
-    }
-  }
+  const signIn = (values: { email: string; password: string }) => {
+    signInWithEmailAndPassword(auth, values.email, values.password)
+      .then(() => {
+        navigation.navigate("Dining");
+      })
+      .catch((error) => {
+        switch (error.code) {
+          case "auth/invalid-email":
+            alert("Not a valid email address.");
+            break;
+          case "auth/wrong-password":
+            alert("Wrong password.");
+            break;
+          case "auth/user-not-found":
+            alert("User with this email doesn't exist.");
+            break;
+          case "auth/user-disabled":
+            alert("User with this email has been disabled.");
+            break;
+          default:
+            alert(error.message);
+        }
+      });
+  };
 
   return (
     <View style={styles.container}>
