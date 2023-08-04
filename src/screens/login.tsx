@@ -19,7 +19,10 @@ export default function Login({ navigation }: LoginProps) {
   const signIn = (values: { email: string; password: string }) => {
     signInWithEmailAndPassword(auth, values.email, values.password)
       .then(() => {
-        navigation.navigate("Dining");
+        navigation.reset({
+          index: 0,
+          routes: [{ name: "Dining" }],
+        });
       })
       .catch((error) => {
         switch (error.code) {

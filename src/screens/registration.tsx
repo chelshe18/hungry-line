@@ -30,7 +30,10 @@ export default function Registration({ navigation }: RegistrationProps) {
         });
       })
       .then(() => {
-        navigation.navigate("Dining");
+        navigation.reset({
+          index: 0,
+          routes: [{ name: "Dining" }],
+        });
       })
       .catch((error) => {
         switch (error.code) {
