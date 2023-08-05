@@ -3,6 +3,7 @@ import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../App";
+import { FIREBASE_AUTH } from "../../firebase.config";
 import Timer from "../components/timer";
 import Ellipse from "../components/ellipse";
 import { Colors } from "react-native/Libraries/NewAppScreen";
@@ -14,15 +15,21 @@ type NotificationProps = NativeStackScreenProps<
 >;
 
 export default function Notification({ navigation }: NotificationProps) {
+  const auth = FIREBASE_AUTH;
+
   return (
     <View style={styles.container}>
       <Ellipse />
       <Image style={styles.image} source={require("../assets/noti.png")} />
       <Text style={styles.midText}>
-        Hi Chenlu, your table is almost ready. Please arrive within 5 minutes or
-        your position in the queue will be canceled.
+        Hi {auth.currentUser?.displayName}, your table is almost ready. Please
+        arrive within 5 minutes or your position in the queue will be canceled.
       </Text>
-      <Timer />
+      <Timer
+        onFinish={() => {
+          navigation.navigate("QueueStatus");
+        }}
+      />
       <Button
         text="Here"
         onPress={() => {

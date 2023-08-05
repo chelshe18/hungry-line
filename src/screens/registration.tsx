@@ -7,6 +7,8 @@ import { RootStackParamList } from "../App";
 import Button from "../components/button";
 import SignUpButton from "../components/sign_up_button";
 import Ellipse from "../components/ellipse";
+import { FIREBASE_AUTH } from "../../firebase.config";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 type RegistrationProps = NativeStackScreenProps<
   RootStackParamList,
@@ -14,6 +16,48 @@ type RegistrationProps = NativeStackScreenProps<
 >;
 
 export default function Registration({ navigation }: RegistrationProps) {
+  const auth = FIREBASE_AUTH;
+
+  const signUp = (values: {
+    name: string;
+    email: string;
+    password: string;
+  }) => {
+    createUserWithEmailAndPassword(auth, values.email, values.password)
+      .then((userCredential) => {
+        return updateProfile(userCredential.user, {
+          displayName: values.name,
+        });
+      })
+      .then(() => {
+        navigation.reset({
+          index: 0,
+          routes: [{ name: "Dining" }],
+        });
+      })
+      .catch((error) => {
+        switch (error.code) {
+          case "auth/invalid-email":
+            alert("Not a valid email address.");
+            break;
+          case "auth/email-already-in-use":
+            alert("This email address is already in use.");
+            break;
+          case "auth/operation-not-allowed":
+            alert("Signing in with email and password is not allowed.");
+            break;
+          case "auth/weak-password":
+            alert("Password is not strong enough.");
+            break;
+          case "auth/missing-password":
+            alert("You didn't enter a password");
+            break;
+          default:
+            alert(error.message);
+        }
+      });
+  };
+
   return (
     <View style={styles.container}>
       <Ellipse />
@@ -23,8 +67,19 @@ export default function Registration({ navigation }: RegistrationProps) {
           Let's help you get into the dining queue
         </Text>
         <Formik
-          initialValues={{ name: "", email: "", password: "" }}
-          onSubmit={(values) => {}}
+          initialValues={{
+            name: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
+          }}
+          onSubmit={(values) => {
+            if (values.password != values.confirmPassword) {
+              alert("Your passwords don't match.");
+            } else {
+              signUp(values);
+            }
+          }}
         >
           {(props) => (
             <View>
@@ -41,19 +96,21 @@ export default function Registration({ navigation }: RegistrationProps) {
                 value={props.values.email}
               />
               <TextInput
+                secureTextEntry={true}
                 style={styles.input}
                 placeholder="Enter password"
                 onChangeText={props.handleChange("password")}
                 value={props.values.password}
               />
-              <TextInput style={styles.input} placeholder="Confirm password" />
-              <Text style={styles.subtitle}></Text>
-              <Button
-                text="Register"
-                onPress={() => {
-                  navigation.navigate("Dining");
-                }}
+              <TextInput
+                secureTextEntry={true}
+                style={styles.input}
+                placeholder="Confirm password"
+                onChangeText={props.handleChange("confirmPassword")}
+                value={props.values.confirmPassword}
               />
+              <Text style={styles.subtitle}></Text>
+              <Button text="Register" onPress={props.handleSubmit} />
               <View style={styles.createAccount}>
                 <Text style={styles.text}>Already have an account?</Text>
                 <SignUpButton

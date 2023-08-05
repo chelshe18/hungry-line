@@ -8,10 +8,42 @@ import LoginButton from "../components/button";
 import PasswordButton from "../components/password_button";
 import SignUpButton from "../components/sign_up_button";
 import Ellipse from "../components/ellipse";
+import { FIREBASE_AUTH } from "../../firebase.config";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 type LoginProps = NativeStackScreenProps<RootStackParamList, "Login">;
 
 export default function Login({ navigation }: LoginProps) {
+  const auth = FIREBASE_AUTH;
+
+  const signIn = (values: { email: string; password: string }) => {
+    signInWithEmailAndPassword(auth, values.email, values.password)
+      .then(() => {
+        navigation.reset({
+          index: 0,
+          routes: [{ name: "Dining" }],
+        });
+      })
+      .catch((error) => {
+        switch (error.code) {
+          case "auth/invalid-email":
+            alert("Not a valid email address.");
+            break;
+          case "auth/wrong-password":
+            alert("Wrong password.");
+            break;
+          case "auth/user-not-found":
+            alert("User with this email doesn't exist.");
+            break;
+          case "auth/user-disabled":
+            alert("User with this email has been disabled.");
+            break;
+          default:
+            alert(error.message);
+        }
+      });
+  };
+
   return (
     <View style={styles.container}>
       <Ellipse />
@@ -23,7 +55,9 @@ export default function Login({ navigation }: LoginProps) {
         />
         <Formik
           initialValues={{ email: "", password: "" }}
-          onSubmit={(values) => {}}
+          onSubmit={(values) => {
+            signIn(values);
+          }}
         >
           {(props) => (
             <View>
@@ -34,18 +68,14 @@ export default function Login({ navigation }: LoginProps) {
                 value={props.values.email}
               />
               <TextInput
+                secureTextEntry={true}
                 style={styles.input}
                 placeholder="Enter password"
                 onChangeText={props.handleChange("password")}
                 value={props.values.password}
               />
               <PasswordButton onPress={() => {}} />
-              <LoginButton
-                text="Sign In"
-                onPress={() => {
-                  navigation.navigate("Dining");
-                }}
-              />
+              <LoginButton text="Sign In" onPress={props.handleSubmit} />
               <View style={styles.createAccount}>
                 <Text style={styles.text}>Don't have an account?</Text>
                 <SignUpButton
