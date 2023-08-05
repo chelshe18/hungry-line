@@ -43,6 +43,12 @@ export default function WaitingLine({ navigation }: WaitingLineProps) {
       </Text>
       <Image style={styles.image} source={require("../assets/map.png")} />
       <Button text="Quit The Queue" onPress={handlePress} />
+      <Button
+        text="TEMP BUTTON: Notification"
+        onPress={() => {
+          navigation.navigate("Notification");
+        }}
+      />
     </View>
   );
 }

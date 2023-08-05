@@ -22,10 +22,14 @@ export default function Notification({ navigation }: NotificationProps) {
       <Ellipse />
       <Image style={styles.image} source={require("../assets/noti.png")} />
       <Text style={styles.midText}>
-        Hi {auth.currentUser?.displayName}, your table is almost ready. Please arrive within 5 minutes or
-        your position in the queue will be canceled.
+        Hi {auth.currentUser?.displayName}, your table is almost ready. Please
+        arrive within 5 minutes or your position in the queue will be canceled.
       </Text>
-      <Timer />
+      <Timer
+        onFinish={() => {
+          navigation.navigate("QueueStatus");
+        }}
+      />
       <Button
         text="Here"
         onPress={() => {
