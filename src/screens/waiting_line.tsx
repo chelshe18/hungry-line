@@ -8,6 +8,7 @@ import { FIREBASE_AUTH, db } from "../../firebase.config";
 import Ellipse from "../components/ellipse";
 import * as Progress from "react-native-progress";
 import Button from "../components/button";
+import QueueCount from "../components/queue_count";
 
 type WaitingLineProps = NativeStackScreenProps<
   RootStackParamList,
@@ -15,8 +16,8 @@ type WaitingLineProps = NativeStackScreenProps<
 >;
 
 export default function WaitingLine({ navigation }: WaitingLineProps) {
-  const totalPeople = 20; // total number of people in the queue
-  const waitingPeople = 5; // people ahead of you
+  const totalPeople = QueueCount(); // total number of people in the queue
+  const waitingPeople = 1; // people ahead of you
   const progress = (totalPeople - waitingPeople) / totalPeople;
   const auth = FIREBASE_AUTH;
   const user = {
@@ -35,7 +36,8 @@ export default function WaitingLine({ navigation }: WaitingLineProps) {
     <View style={styles.container}>
       <Ellipse />
       <Text style={styles.title}>
-        {waitingPeople} people waiting ahead of you{" "}
+        {waitingPeople} {waitingPeople == 1 ? "person" : "people"} waiting ahead
+        of you
       </Text>
       <Progress.Bar
         progress={progress}

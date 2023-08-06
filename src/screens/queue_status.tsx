@@ -47,7 +47,7 @@ export default function QueueStatus({ navigation }: QueueStatusProps) {
         source={require("../assets/dining_hall_1.jpg")}
       />
       <Text style={styles.midText}>
-        There are currently
+        There {QueueCount() == 1 ? "is" : "are"} currently
         <Text style={{ color: "#CF4F4F" }}> {QueueCount()} people </Text>
         ahead of you in the queue.
       </Text>
