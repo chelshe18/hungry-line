@@ -48,10 +48,7 @@ export default function QueueStatus({ navigation }: QueueStatusProps) {
       />
       <Text style={styles.midText}>
         There are currently
-        <Text style={{ color: "#CF4F4F" }}>
-          {" "}
-          <QueueCount /> people{" "}
-        </Text>
+        <Text style={{ color: "#CF4F4F" }}> {QueueCount()} people </Text>
         ahead of you in the queue.
       </Text>
       <Text style={styles.staticText}>
