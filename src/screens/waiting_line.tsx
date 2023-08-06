@@ -3,6 +3,8 @@ import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../App";
+import { deleteDoc, doc } from "firebase/firestore";
+import { FIREBASE_AUTH, db } from "../../firebase.config";
 import Ellipse from "../components/ellipse";
 import * as Progress from "react-native-progress";
 import Button from "../components/button";
@@ -16,10 +18,17 @@ export default function WaitingLine({ navigation }: WaitingLineProps) {
   const totalPeople = 20; // total number of people in the queue
   const waitingPeople = 5; // people ahead of you
   const progress = (totalPeople - waitingPeople) / totalPeople;
+  const auth = FIREBASE_AUTH;
+  const user = {
+    email: auth.currentUser?.email,
+    id: auth.currentUser?.uid,
+  };
 
   const handlePress = () => {
-    // Go to queue status page
-    navigation.pop();
+    const docRef = doc(db, "queue", user.id ? user.id : "");
+    deleteDoc(docRef).then(() => {
+      navigation.pop();
+    });
   };
 
   return (
