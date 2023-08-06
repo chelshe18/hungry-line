@@ -7,7 +7,14 @@ import { FIREBASE_AUTH, db } from "../../firebase.config";
 import Ellipse from "../components/ellipse";
 import Button from "../components/button";
 import WaitingLine from "./waiting_line";
-import { collection, addDoc, getCountFromServer, QueryDocumentSnapshot, QuerySnapshot } from "firebase/firestore";
+import {
+  collection,
+  setDoc,
+  doc,
+  getCountFromServer,
+  QueryDocumentSnapshot,
+  QuerySnapshot,
+} from "firebase/firestore";
 import QueueCount from "../components/queue_count";
 
 type QueueStatusProps = NativeStackScreenProps<
@@ -15,14 +22,21 @@ type QueueStatusProps = NativeStackScreenProps<
   "QueueStatus"
 >;
 
-
-export default  function QueueStatus({ navigation }: QueueStatusProps) {
+export default function QueueStatus({ navigation }: QueueStatusProps) {
   const auth = FIREBASE_AUTH;
   const user = {
-  email: auth.currentUser?.email,
-  id: auth.currentUser?.uid
+    email: auth.currentUser?.email,
+    id: auth.currentUser?.uid,
   };
-  const collectionRef = collection(db, 'current-line-queue');
+  //const collectionRef = collection(db, "current-line-queue");
+
+  const joinQueue = () => {
+    setDoc(doc(db, "queue", user.id ? user.id : ""), {
+      email: user.email,
+    }).then(() => {
+      navigation.navigate("WaitingLine");
+    });
+  };
 
   return (
     <View style={styles.container}>
@@ -34,7 +48,10 @@ export default  function QueueStatus({ navigation }: QueueStatusProps) {
       />
       <Text style={styles.midText}>
         There are currently
-        <Text style={{ color: "#CF4F4F" }}> <QueueCount/> people </Text>
+        <Text style={{ color: "#CF4F4F" }}>
+          {" "}
+          <QueueCount /> people{" "}
+        </Text>
         ahead of you in the queue.
       </Text>
       <Text style={styles.staticText}>
@@ -43,13 +60,7 @@ export default  function QueueStatus({ navigation }: QueueStatusProps) {
       </Text>
       <Text style={styles.subtitle}>If you join the queue now</Text>
       <View style={{ marginBottom: 10 }}>
-        <Button
-          text="Join queue"
-          onPress={() => {
-            addDoc(collectionRef, user);
-            navigation.navigate("WaitingLine")
-          }}
-        />
+        <Button text="Join queue" onPress={joinQueue} />
       </View>
       <Button
         text="Switch Dining Halls"
@@ -115,4 +126,3 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
-
