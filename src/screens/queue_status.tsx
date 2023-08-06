@@ -48,7 +48,10 @@ export default function QueueStatus({ navigation }: QueueStatusProps) {
       />
       <Text style={styles.midText}>
         There {QueueCount() == 1 ? "is" : "are"} currently
-        <Text style={{ color: "#CF4F4F" }}> {QueueCount()} people </Text>
+        <Text style={{ color: "#CF4F4F" }}>
+          {" "}
+          {QueueCount()} {QueueCount() == 1 ? "person" : "people"}{" "}
+        </Text>
         ahead of you in the queue.
       </Text>
       <Text style={styles.staticText}>
