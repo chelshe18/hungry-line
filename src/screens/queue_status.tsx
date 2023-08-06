@@ -3,17 +3,27 @@ import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../App";
+import { FIREBASE_AUTH, db } from "../../firebase.config";
 import Ellipse from "../components/ellipse";
 import Button from "../components/button";
-import Queue_tracking from "./queue_tracking";
+import WaitingLine from "./waiting_line";
+import { collection, addDoc, getCountFromServer, QueryDocumentSnapshot, QuerySnapshot } from "firebase/firestore";
+import QueueCount from "../components/queue_count";
 
 type QueueStatusProps = NativeStackScreenProps<
   RootStackParamList,
   "QueueStatus"
 >;
 
-export default function QueueStatus({ navigation }: QueueStatusProps) {
-  const totalPeople = 20;
+
+export default  function QueueStatus({ navigation }: QueueStatusProps) {
+  const auth = FIREBASE_AUTH;
+  const user = {
+  email: auth.currentUser?.email,
+  id: auth.currentUser?.uid
+  };
+  const collectionRef = collection(db, 'current-line-queue');
+
   return (
     <View style={styles.container}>
       <Ellipse />
@@ -24,7 +34,7 @@ export default function QueueStatus({ navigation }: QueueStatusProps) {
       />
       <Text style={styles.midText}>
         There are currently
-        <Text style={{ color: "#CF4F4F" }}> {totalPeople} people </Text>
+        <Text style={{ color: "#CF4F4F" }}> <QueueCount/> people </Text>
         ahead of you in the queue.
       </Text>
       <Text style={styles.staticText}>
@@ -36,7 +46,8 @@ export default function QueueStatus({ navigation }: QueueStatusProps) {
         <Button
           text="Join queue"
           onPress={() => {
-            navigation.navigate("WaitingLine");
+            addDoc(collectionRef, user);
+            navigation.navigate("WaitingLine")
           }}
         />
       </View>
@@ -76,8 +87,8 @@ const styles = StyleSheet.create({
     fontStyle: "normal",
     fontFamily: "poppins-semibold",
     lineHeight: 23,
-    width: 273,
-    height: 73,
+    width: 300,
+    height: 75,
     textAlign: "center",
   },
   staticText: {
@@ -104,3 +115,4 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
+
