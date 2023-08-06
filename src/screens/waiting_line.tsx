@@ -1,10 +1,11 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../App";
 import { deleteDoc, doc } from "firebase/firestore";
 import { FIREBASE_AUTH, db } from "../../firebase.config";
+import { collection, onSnapshot } from "firebase/firestore";
 import Ellipse from "../components/ellipse";
 import * as Progress from "react-native-progress";
 import Button from "../components/button";
@@ -24,12 +25,22 @@ export default function WaitingLine({ navigation }: WaitingLineProps) {
     email: auth.currentUser?.email,
     id: auth.currentUser?.uid,
   };
+  const [firstInQueue, setFirstInQueue] = useState(0);
+
+  onSnapshot(collection(db, "queue"), (snapshot) => {
+    let timestamps: number[] = [];
+    snapshot.docs.forEach((doc) => {
+      timestamps.push({ ...doc.data() }.joinedAt);
+    });
+    setFirstInQueue(Math.min.apply(Math, timestamps));
+    //console.log(Math.min.apply(Math, timestamps));
+  });
+
+  console.log(firstInQueue);
 
   const handlePress = () => {
-    const docRef = doc(db, "queue", user.id ? user.id : "");
-    deleteDoc(docRef).then(() => {
-      navigation.pop();
-    });
+    deleteDoc(doc(db, "queue", user.id ? user.id : ""));
+    navigation.pop();
   };
 
   return (

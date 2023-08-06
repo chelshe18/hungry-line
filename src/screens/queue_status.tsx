@@ -33,9 +33,9 @@ export default function QueueStatus({ navigation }: QueueStatusProps) {
   const joinQueue = () => {
     setDoc(doc(db, "queue", user.id ? user.id : ""), {
       email: user.email,
-    }).then(() => {
-      navigation.navigate("WaitingLine");
+      joinedAt: Date.now(),
     });
+    navigation.navigate("WaitingLine");
   };
 
   return (
