@@ -5,7 +5,13 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../App";
 import { deleteDoc, doc } from "firebase/firestore";
 import { FIREBASE_AUTH, db } from "../../firebase.config";
-import { collection, onSnapshot } from "firebase/firestore";
+import {
+  collection,
+  onSnapshot,
+  query,
+  where,
+  getDocs,
+} from "firebase/firestore";
 import Ellipse from "../components/ellipse";
 import * as Progress from "react-native-progress";
 import Button from "../components/button";
@@ -25,18 +31,34 @@ export default function WaitingLine({ navigation }: WaitingLineProps) {
     email: auth.currentUser?.email,
     id: auth.currentUser?.uid,
   };
-  const [firstInQueue, setFirstInQueue] = useState(0);
+  const [firstInQueue, setFirstInQueue] = useState("");
 
   onSnapshot(collection(db, "queue"), (snapshot) => {
     let timestamps: number[] = [];
     snapshot.docs.forEach((doc) => {
       timestamps.push({ ...doc.data() }.joinedAt);
     });
-    setFirstInQueue(Math.min.apply(Math, timestamps));
-    //console.log(Math.min.apply(Math, timestamps));
+
+    // Find the first person in the queue
+    const q = query(
+      collection(db, "queue"),
+      where("joinedAt", "==", Math.min.apply(Math, timestamps))
+    );
+    getDocs(q).then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        setFirstInQueue(doc.id);
+      });
+    });
   });
 
-  console.log(firstInQueue);
+  // If user is the first in the queue
+  if (user.id == firstInQueue) {
+    // Run after 10 seconds for demo
+    setTimeout(() => {
+      deleteDoc(doc(db, "queue", user.id ? user.id : ""));
+      navigation.navigate("Notification");
+    }, 5000);
+  }
 
   const handlePress = () => {
     deleteDoc(doc(db, "queue", user.id ? user.id : ""));
