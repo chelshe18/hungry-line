@@ -40,12 +40,7 @@ export default function Login({ navigation }: LoginProps) {
                 value={props.values.password}
               />
               <PasswordButton onPress={() => {}} />
-              <LoginButton
-                text="Sign In"
-                onPress={() => {
-                  navigation.navigate("Dining");
-                }}
-              />
+              <LoginButton text="Sign In" onPress={() => {}} />
               <View style={styles.createAccount}>
                 <Text style={styles.text}>Don't have an account?</Text>
                 <SignUpButton
@@ -71,12 +66,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   heading: {
+    fontWeight: "bold",
     fontSize: 24,
     color: "#617a44",
     padding: 10,
     textAlign: "center",
     marginTop: 50,
-    fontFamily: "poppins-bold",
   },
   image: {
     height: 138,
@@ -89,21 +84,20 @@ const styles = StyleSheet.create({
     backgroundColor: "#f7e1ae",
     color: "#393A39",
     borderColor: "black",
-    paddingHorizontal: 20,
-    fontSize: 14,
+    padding: 20,
+    fontSize: 16,
     borderRadius: 15,
     height: 60,
     width: 301,
     textAlign: "left",
-    textAlignVertical: "center",
-    fontFamily: "poppins-regular",
+    fontWeight: "bold",
     marginBottom: 5,
     marginTop: 5,
   },
   text: {
     color: "#617A55",
-    fontFamily: "poppins-semibold",
-    fontSize: 14,
+    fontWeight: "bold",
+    fontSize: 15,
     paddingVertical: 10,
   },
   createAccount: {

@@ -51,7 +51,6 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     paddingBottom: 40,
     fontSize: 16,
-    fontFamily: "poppins-regular",
   },
 
   button: {
@@ -80,7 +79,7 @@ const styles = StyleSheet.create({
   },
 
   heading: {
-    fontFamily: "poppins-bold",
+    fontWeight: "bold",
     fontSize: 32,
     color: "#617a44",
     padding: 10,

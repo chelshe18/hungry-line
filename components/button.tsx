@@ -28,10 +28,10 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "#fff8d6",
-    fontFamily: "poppins-bold",
+    fontWeight: "bold",
     fontSize: 16,
     textAlign: "center",
     textAlignVertical: "center",
-    padding: 18,
+    padding: 20,
   },
 });
