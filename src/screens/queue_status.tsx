@@ -31,11 +31,12 @@ export default function QueueStatus({ navigation }: QueueStatusProps) {
   //const collectionRef = collection(db, "current-line-queue");
 
   const joinQueue = () => {
+    const joinedAt = Date.now();
     setDoc(doc(db, "queue", user.id ? user.id : ""), {
       email: user.email,
-      joinedAt: Date.now(),
+      joinedAt: joinedAt,
     });
-    navigation.navigate("WaitingLine");
+    navigation.navigate("WaitingLine", { time: joinedAt });
   };
 
   return (

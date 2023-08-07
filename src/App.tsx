@@ -21,7 +21,7 @@ export type RootStackParamList = {
   Login: undefined;
   Registration: undefined;
   QueueStatus: undefined;
-  WaitingLine: undefined;
+  WaitingLine: { time: number };
   Dining: undefined;
   Notification: undefined;
   QueueTracking: undefined;
@@ -83,4 +83,3 @@ export default function App() {
     </NavigationContainer>
   );
 }
-
