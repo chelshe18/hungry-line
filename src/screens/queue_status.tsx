@@ -27,13 +27,14 @@ export default function QueueStatus({ navigation }: QueueStatusProps) {
   const user = {
     email: auth.currentUser?.email,
     id: auth.currentUser?.uid,
+    joinedAt: Date.now()
   };
   //const collectionRef = collection(db, "current-line-queue");
 
   const joinQueue = () => {
     setDoc(doc(db, "queue", user.id ? user.id : ""), {
       email: user.email,
-      joinedAt: Date.now(),
+      joinedAt: user.joinedAt,
     });
     navigation.navigate("WaitingLine");
   };
@@ -56,7 +57,7 @@ export default function QueueStatus({ navigation }: QueueStatusProps) {
       </Text>
       <Text style={styles.staticText}>
         Estimate wait times:
-        <Text style={styles.dynamicText}> 15 minutes</Text>
+        <Text style={styles.dynamicText}> {QueueCount()} minutes</Text>
       </Text>
       <Text style={styles.subtitle}>If you join the queue now</Text>
       <View style={{ marginBottom: 10 }}>

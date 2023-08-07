@@ -24,12 +24,12 @@ type WaitingLineProps = NativeStackScreenProps<
 
 export default function WaitingLine({ navigation }: WaitingLineProps) {
   const totalPeople = QueueCount(); // total number of people in the queue
-  const waitingPeople = 1; // people ahead of you
-  const progress = (totalPeople - waitingPeople) / totalPeople;
+  const progress = (totalPeople - 1) / totalPeople;
   const auth = FIREBASE_AUTH;
   const user = {
     email: auth.currentUser?.email,
     id: auth.currentUser?.uid,
+    joinedAt: Date.now()
   };
   const [firstInQueue, setFirstInQueue] = useState("");
 
@@ -51,19 +51,31 @@ export default function WaitingLine({ navigation }: WaitingLineProps) {
     });
   });
 
+  const [waitingPeople, setWaitingPeople] = useState<number>(0)
+  const waiting_query = query(
+    collection(db, "queue"),
+    where("joinedAt", "<", user.joinedAt)
+  )
+  getDocs(waiting_query).then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+      setWaitingPeople(querySnapshot.size)
+    })
+  })
+
   // If user is the first in the queue
   if (user.id == firstInQueue) {
-    // Run after 10 seconds for demo
-    setTimeout(() => {
-      deleteDoc(doc(db, "queue", user.id ? user.id : ""));
-      navigation.navigate("Notification");
+   // Run after 10 seconds for demo
+  setTimeout(() => {
+  deleteDoc(doc(db, "queue", user.id ? user.id : ""));
+  navigation.navigate("Notification");
     }, 5000);
-  }
+   }
 
   const handlePress = () => {
     deleteDoc(doc(db, "queue", user.id ? user.id : ""));
     navigation.pop();
   };
+
 
   return (
     <View style={styles.container}>
@@ -83,7 +95,7 @@ export default function WaitingLine({ navigation }: WaitingLineProps) {
       />
       <Text style={styles.staticText}>
         Estimate wait times:
-        <Text style={styles.dynamicText}> 11 minutes</Text>
+        <Text style={styles.dynamicText}> {waitingPeople} minutes</Text>
       </Text>
       <Image style={styles.image} source={require("../assets/map.png")} />
       <Button text="Quit The Queue" onPress={handlePress} />
