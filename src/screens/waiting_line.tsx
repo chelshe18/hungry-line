@@ -1,11 +1,21 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../App";
+import { deleteDoc, doc } from "firebase/firestore";
+import { FIREBASE_AUTH, db } from "../../firebase.config";
+import {
+  collection,
+  onSnapshot,
+  query,
+  where,
+  getDocs,
+} from "firebase/firestore";
 import Ellipse from "../components/ellipse";
 import * as Progress from "react-native-progress";
 import Button from "../components/button";
+import QueueCount from "../components/queue_count";
 
 type WaitingLineProps = NativeStackScreenProps<
   RootStackParamList,
@@ -13,12 +23,45 @@ type WaitingLineProps = NativeStackScreenProps<
 >;
 
 export default function WaitingLine({ navigation }: WaitingLineProps) {
-  const totalPeople = 20; // total number of people in the queue
-  const waitingPeople = 5; // people ahead of you
+  const totalPeople = QueueCount(); // total number of people in the queue
+  const waitingPeople = 1; // people ahead of you
   const progress = (totalPeople - waitingPeople) / totalPeople;
+  const auth = FIREBASE_AUTH;
+  const user = {
+    email: auth.currentUser?.email,
+    id: auth.currentUser?.uid,
+  };
+  const [firstInQueue, setFirstInQueue] = useState("");
+
+  onSnapshot(collection(db, "queue"), (snapshot) => {
+    let timestamps: number[] = [];
+    snapshot.docs.forEach((doc) => {
+      timestamps.push({ ...doc.data() }.joinedAt);
+    });
+
+    // Find the first person in the queue
+    const q = query(
+      collection(db, "queue"),
+      where("joinedAt", "==", Math.min.apply(Math, timestamps))
+    );
+    getDocs(q).then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        setFirstInQueue(doc.id);
+      });
+    });
+  });
+
+  // If user is the first in the queue
+  if (user.id == firstInQueue) {
+    // Run after 10 seconds for demo
+    setTimeout(() => {
+      deleteDoc(doc(db, "queue", user.id ? user.id : ""));
+      navigation.navigate("Notification");
+    }, 5000);
+  }
 
   const handlePress = () => {
-    // Go to queue status page
+    deleteDoc(doc(db, "queue", user.id ? user.id : ""));
     navigation.pop();
   };
 
@@ -26,7 +69,8 @@ export default function WaitingLine({ navigation }: WaitingLineProps) {
     <View style={styles.container}>
       <Ellipse />
       <Text style={styles.title}>
-        {waitingPeople} people waiting ahead of you{" "}
+        {waitingPeople} {waitingPeople == 1 ? "person" : "people"} waiting ahead
+        of you
       </Text>
       <Progress.Bar
         progress={progress}
