@@ -1,12 +1,17 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../App";
 import Yellow from "../components/yellow_ellipse";
 import Filter from "../components/filter_button";
 import { SearchBar } from "react-native-screens";
 import FilterComponent from "../components/filter_compon";
+import Button from "../components/button";
 
-export default function Dining(this: any) {
+type DiningProps = NativeStackScreenProps<RootStackParamList, "Dining">;
+
+export default function Dining({ navigation }: DiningProps) {
     return (
         <View style={styles.container}>
             <View style={styles.top}>
