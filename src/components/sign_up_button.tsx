@@ -7,11 +7,11 @@ type props = {
   onPress: () => void;
 };
 
-export default function Button({ text, onPress }: props) {
+export default function SignUpButton({ text, onPress }: props) {
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.button}>
-        <Text style={styles.buttonText}>{text}</Text>
+        <Text style={styles.buttonText}> {text} </Text>
       </View>
     </TouchableOpacity>
   );
@@ -20,18 +20,17 @@ export default function Button({ text, onPress }: props) {
 const styles = StyleSheet.create({
   button: {
     borderRadius: 16,
-    paddingHorizontal: 20,
-    marginTop: 5,
-    width: 301,
-    height: 60,
-    backgroundColor: "#a4d0a4",
+    paddingHorizontal: 0,
+    width: 59,
+    paddingBottom: 30,
+    alignSelf: "flex-end",
   },
   buttonText: {
-    color: "#fff8d6",
-    fontWeight: "bold",
-    fontSize: 16,
+    color: "#a2cea2",
+    fontFamily: "poppins-semibold",
+    fontSize: 14,
     textAlign: "center",
     textAlignVertical: "center",
-    padding: 20,
+    paddingVertical: 10,
   },
 });

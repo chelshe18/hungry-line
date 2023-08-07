@@ -2,26 +2,38 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../src/App";
+import { RootStackParamList } from "../App";
+import { FIREBASE_AUTH } from "../../firebase.config";
+import Timer from "../components/timer";
 import Ellipse from "../components/ellipse";
+import { Colors } from "react-native/Libraries/NewAppScreen";
 import Button from "../components/button";
 
-type HungrylineProps = NativeStackScreenProps<RootStackParamList, "Hungryline">;
+type NotificationProps = NativeStackScreenProps<
+  RootStackParamList,
+  "Notification"
+>;
 
-export default function Hungryline({ navigation }: HungrylineProps) {
+export default function Notification({ navigation }: NotificationProps) {
+  const auth = FIREBASE_AUTH;
+
   return (
     <View style={styles.container}>
       <Ellipse />
-      <Image style={styles.image} source={require("../assets/Picture1.png")} />
-      <Text style={styles.heading}>Hungry Line </Text>
+      <Image style={styles.image} source={require("../assets/noti.png")} />
       <Text style={styles.midText}>
-        Say goodbye to the frustration of long queues and hello to a seamless,
-        time-saving dining experience!
+        Hi {auth.currentUser?.displayName}, your table is almost ready. Please
+        arrive within 5 minutes or your position in the queue will be canceled.
       </Text>
+      <Timer
+        onFinish={() => {
+          navigation.navigate("QueueStatus");
+        }}
+      />
       <Button
-        text="Get started"
+        text="Here"
         onPress={() => {
-          navigation.navigate("Login");
+          navigation.navigate("QueueTracking");
         }}
       />
     </View>
@@ -37,20 +49,22 @@ const styles = StyleSheet.create({
   },
 
   image: {
-    marginTop: 17,
-    marginLeft: 3.4,
-    marginRight: 3.4,
-    width: 318,
-    height: 179,
+    marginTop: 60,
   },
 
   midText: {
     color: "#000",
-    marginLeft: 40,
-    marginRight: 40,
-    paddingTop: 20,
-    paddingBottom: 40,
+    lineHeight: 23,
     fontSize: 16,
+    fontStyle: "normal",
+    fontFamily: "poppins-semibold",
+    width: 275,
+    height: 108,
+    flexShrink: 0,
+    marginTop: 68,
+    marginLeft: 15,
+    marginBottom: 3,
+    textAlign: "center",
   },
 
   button: {
@@ -70,20 +84,13 @@ const styles = StyleSheet.create({
   textButton: {
     color: "#FFF8D6",
     textAlign: "center",
+    // verticalAlign:"middle",
     justifyContent: "center",
     alignItems: "center",
     flex: 1,
     fontSize: 15,
+    // fontFamily: "Poppins",
     fontStyle: "normal",
     fontWeight: "600",
-  },
-
-  heading: {
-    fontWeight: "bold",
-    fontSize: 32,
-    color: "#617a44",
-    padding: 10,
-    textAlign: "center",
-    marginTop: 50,
   },
 });
