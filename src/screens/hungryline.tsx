@@ -84,5 +84,7 @@ const styles = StyleSheet.create({
     fontSize: 32,
     color: "#617a44",
     padding: 10,
+    textAlign: "center",
+    marginTop: 50,
   },
 });
