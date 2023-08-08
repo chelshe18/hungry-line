@@ -7,7 +7,7 @@ export default function FilterComponent() {
     <View style={styles.filter}>
       <View style={styles.filterContainer}>
         <TouchableOpacity>
-          <Text style={styles.FilterComponentText}>X</Text>
+          <Text style={styles.FilterComponentText}></Text>
         </TouchableOpacity>
         <Text style={styles.FilterComponentText}>Filter</Text>
         <TouchableOpacity>
@@ -28,13 +28,15 @@ export default function FilterComponent() {
 
 const styles = StyleSheet.create({
   filter: {
-    borderRadius: 15,
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
     backgroundColor: "#F7E1AE",
     display: "flex",
     width: "100%",
     position: "absolute",
     flex: 1,
     bottom: 0,
+    zIndex: 1,
   },
 
   filterContainer: {

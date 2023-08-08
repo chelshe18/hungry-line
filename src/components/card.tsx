@@ -1,19 +1,48 @@
 import React, { useState } from "react";
 import { StyleSheet, Image, View, Text, TouchableOpacity } from "react-native";
+import { db } from "../../firebase.config";
+import { getDoc, setDoc, doc } from "firebase/firestore";
 
 type props = {
-  name: string;
-  open: boolean;
-  time: string;
   image: any;
+  id: string;
   onPress: () => void;
 };
 
-export default function Card({ name, open, time, image, onPress }: props) {
+export default function Card({ image, id, onPress }: props) {
   const [favorited, setFavorited] = useState(false);
+  const [name, setName] = useState("");
+  const [open, setOpen] = useState(0);
+  const [close, setClose] = useState(0);
+  const [distance, setDistance] = useState(0);
+
+  const docRef = doc(db, "dining-halls", id);
+  getDoc(docRef).then((docSnap) => {
+    if (docSnap.exists()) {
+      setName(docSnap.data().name);
+      setOpen(docSnap.data().open);
+      setClose(docSnap.data().close);
+      setDistance(docSnap.data().distance);
+      setFavorited(docSnap.data().favorited);
+    }
+  });
+
+  const today = new Date();
+  const currHour = today.getHours();
+  const isOpen = currHour >= open && currHour < close;
+  const openStr = open > 12 ? open - 12 + "pm" : open + "am";
+  const closeStr = close > 12 ? close - 12 + "pm" : close + "am";
 
   const handleFavorite = () => {
-    setFavorited(!favorited);
+    setDoc(docRef, {
+      name: name,
+      open: open,
+      close: close,
+      distance: distance,
+      favorited: !favorited,
+    }).then(() => {
+      setFavorited(!favorited);
+    });
   };
 
   return (
@@ -32,7 +61,7 @@ export default function Card({ name, open, time, image, onPress }: props) {
         <Image
           style={styles.clockIcon}
           source={
-            open
+            isOpen
               ? require("../assets/clock_open.png")
               : require("../assets/clock_closed.png")
           }
@@ -44,7 +73,7 @@ export default function Card({ name, open, time, image, onPress }: props) {
             marginVertical: 3,
           }}
         >
-          {open ? "  Open" : " Closed"}
+          {isOpen ? "  Open" : " Closed"}
         </Text>
       </View>
       <View style={styles.cardBody}>
@@ -53,11 +82,11 @@ export default function Card({ name, open, time, image, onPress }: props) {
           <View style={{ flex: 1 }} />
           <View style={{ flexDirection: "row", paddingVertical: 2 }}>
             <Text style={styles.distanceLabel}>Dist. </Text>
-            <Text style={styles.distance}>0.2 mi</Text>
+            <Text style={styles.distance}>{distance} mi</Text>
           </View>
         </View>
         <Text style={styles.timeLabel}>
-          {open ? "Open" : "Closed"} until {time}
+          {isOpen ? "Open" : "Closed"} until {isOpen ? closeStr : openStr}
         </Text>
       </View>
     </TouchableOpacity>

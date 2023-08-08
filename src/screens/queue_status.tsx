@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../App";
@@ -10,6 +10,7 @@ import WaitingLine from "./waiting_line";
 import {
   collection,
   setDoc,
+  getDoc,
   doc,
   getCountFromServer,
   QueryDocumentSnapshot,
@@ -22,42 +23,73 @@ type QueueStatusProps = NativeStackScreenProps<
   "QueueStatus"
 >;
 
-export default function QueueStatus({ navigation }: QueueStatusProps) {
+export default function QueueStatus({ navigation, route }: QueueStatusProps) {
   const auth = FIREBASE_AUTH;
   const user = {
     email: auth.currentUser?.email,
     id: auth.currentUser?.uid,
   };
+  const images = new Map([
+    ["community-dining-center", require("../assets/dining_hall_1.jpg")],
+    ["downtown-hall", require("../assets/dining_hall_2.jpg")],
+    ["dumpling-dining-center", require("../assets/dining_hall_3.jpg")],
+  ]);
+  const hallId = route.params.hallId;
   //const collectionRef = collection(db, "current-line-queue");
 
   const joinQueue = () => {
     const joinedAt = Date.now();
-    setDoc(doc(db, "queue", user.id ? user.id : ""), {
-      email: user.email,
-      joinedAt: joinedAt,
+    setDoc(
+      doc(
+        db,
+        "dining-halls",
+        hallId,
+        "queue",
+        user.id ? user.id : ""
+      ),
+      {
+        email: user.email,
+        joinedAt: joinedAt,
+      }
+    );
+    navigation.navigate("WaitingLine", {
+      hallId: hallId,
+      time: joinedAt,
     });
-    navigation.navigate("WaitingLine", { time: joinedAt });
   };
+
+  const [hallName, setHallName] = useState("");
+  const docRef = doc(db, "dining-halls", hallId);
+  getDoc(docRef).then((docSnap) => {
+    if (docSnap.exists()) {
+      setHallName(docSnap.data().name);
+    }
+  });
 
   return (
     <View style={styles.container}>
       <Ellipse />
-      <Text style={styles.heading}>Community Dining Center</Text>
+      <Text style={styles.heading}>{hallName}</Text>
       <Image
         style={styles.image}
-        source={require("../assets/dining_hall_1.jpg")}
+        source={images.get(hallId)}
       />
       <Text style={styles.midText}>
-        There {QueueCount() == 1 ? "is" : "are"} currently
+        There {QueueCount(hallId) == 1 ? "is" : "are"} currently
         <Text style={{ color: "#CF4F4F" }}>
           {" "}
-          {QueueCount()} {QueueCount() == 1 ? "person" : "people"}{" "}
+          {QueueCount(hallId)}{" "}
+          {QueueCount(hallId) == 1 ? "person" : "people"}{" "}
         </Text>
         ahead of you in the queue.
       </Text>
       <Text style={styles.staticText}>
         Estimate wait times:
-        <Text style={styles.dynamicText}> 15 minutes</Text>
+        <Text style={styles.dynamicText}>
+          {" "}
+          {QueueCount(hallId)}{" "}
+          {QueueCount(hallId) == 1 ? "minute" : "minutes"}
+        </Text>
       </Text>
       <Text style={styles.subtitle}>If you join the queue now</Text>
       <View style={{ marginBottom: 10 }}>

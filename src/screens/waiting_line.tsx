@@ -23,7 +23,8 @@ type WaitingLineProps = NativeStackScreenProps<
 >;
 
 export default function WaitingLine({ navigation, route }: WaitingLineProps) {
-  const totalPeople = QueueCount(); // total number of people in the queue
+  const hallId = route.params.hallId;
+  const totalPeople = QueueCount(hallId); // total number of people in the queue
   const [waitingPeople, setWaitingPeople] = useState<number>(0); // people ahead of you
   const [progress, setProgress] = useState<number>(0);
   const auth = FIREBASE_AUTH;
@@ -34,7 +35,7 @@ export default function WaitingLine({ navigation, route }: WaitingLineProps) {
   };
   const [firstInQueue, setFirstInQueue] = useState("");
 
-  onSnapshot(collection(db, "queue"), (snapshot) => {
+  onSnapshot(collection(db, "dining-halls", hallId, "queue"), (snapshot) => {
     let timestamps: number[] = [];
     snapshot.docs.forEach((doc) => {
       timestamps.push({ ...doc.data() }.joinedAt);
@@ -42,7 +43,7 @@ export default function WaitingLine({ navigation, route }: WaitingLineProps) {
 
     // Find the first person in the queue
     const q = query(
-      collection(db, "queue"),
+      collection(db, "dining-halls", hallId, "queue"),
       where("joinedAt", "==", Math.min.apply(Math, timestamps))
     );
     getDocs(q).then((querySnapshot) => {
@@ -53,15 +54,13 @@ export default function WaitingLine({ navigation, route }: WaitingLineProps) {
 
     // Find number of people in front of you in the queue
     const waiting_query = query(
-      collection(db, "queue"),
+      collection(db, "dining-halls", hallId, "queue"),
       where("joinedAt", "<", user.joinedAt)
     );
     getDocs(waiting_query).then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         setWaitingPeople(querySnapshot.size);
         setProgress((totalPeople - querySnapshot.size) / totalPeople);
-        // console.log("Waiting People: " + waitingPeople);
-        // console.log("Progress: " + progress);
       });
     });
   });
@@ -70,13 +69,15 @@ export default function WaitingLine({ navigation, route }: WaitingLineProps) {
   if (user.id == firstInQueue) {
     // Run after 10 seconds for demo
     setTimeout(() => {
-      deleteDoc(doc(db, "queue", user.id ? user.id : ""));
+      deleteDoc(
+        doc(db, "dining-halls", hallId, "queue", user.id ? user.id : "")
+      );
       navigation.navigate("Notification");
     }, 10000);
   }
 
   const handlePress = () => {
-    deleteDoc(doc(db, "queue", user.id ? user.id : ""));
+    deleteDoc(doc(db, "dining-halls", hallId, "queue", user.id ? user.id : ""));
     navigation.pop();
   };
 
