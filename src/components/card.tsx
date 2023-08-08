@@ -3,14 +3,25 @@ import { StyleSheet, Image, View, Text, TouchableOpacity } from "react-native";
 
 type props = {
   name: string;
-  open: boolean;
-  time: string;
+  open: number;
+  close: number;
+  distance: number;
   image: any;
   onPress: () => void;
 };
 
-export default function Card({ name, open, time, image, onPress }: props) {
+export default function Card({
+  name,
+  open,
+  close,
+  image,
+  distance,
+  onPress,
+}: props) {
   const [favorited, setFavorited] = useState(false);
+  const today = new Date();
+  const currHour = today.getHours();
+  const isOpen = currHour >= open && currHour < close;
 
   const handleFavorite = () => {
     setFavorited(!favorited);
@@ -32,7 +43,7 @@ export default function Card({ name, open, time, image, onPress }: props) {
         <Image
           style={styles.clockIcon}
           source={
-            open
+            isOpen
               ? require("../assets/clock_open.png")
               : require("../assets/clock_closed.png")
           }
@@ -44,7 +55,7 @@ export default function Card({ name, open, time, image, onPress }: props) {
             marginVertical: 3,
           }}
         >
-          {open ? "  Open" : " Closed"}
+          {isOpen ? "  Open" : " Closed"}
         </Text>
       </View>
       <View style={styles.cardBody}>
@@ -53,11 +64,11 @@ export default function Card({ name, open, time, image, onPress }: props) {
           <View style={{ flex: 1 }} />
           <View style={{ flexDirection: "row", paddingVertical: 2 }}>
             <Text style={styles.distanceLabel}>Dist. </Text>
-            <Text style={styles.distance}>0.2 mi</Text>
+            <Text style={styles.distance}>{distance} mi</Text>
           </View>
         </View>
         <Text style={styles.timeLabel}>
-          {open ? "Open" : "Closed"} until {time}
+          {isOpen ? "Open" : "Closed"} until {isOpen ? close : open}:00
         </Text>
       </View>
     </TouchableOpacity>
