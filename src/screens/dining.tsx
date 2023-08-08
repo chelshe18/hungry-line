@@ -64,11 +64,7 @@ export default function Dining({ navigation }: DiningProps) {
                         placeholder="Search Dining and Menus"
                         onChangeText={this.updateSearch}
                         value={search}> */}
-            <Image
-              source={require("../assets/searchpic.png")}
-              style={{ height: 35, width: 35 }}
-            />
-
+            <Ionicons name="search" size={22} style={{ padding: 3 }} />
             {/* </SearchBar> */}
           </View>
           <Ionicons
@@ -101,6 +97,7 @@ export default function Dining({ navigation }: DiningProps) {
             onPress={() => {
               setModalOpen(false);
             }}
+            style={{ position: "absolute", top: 422, left: 11, zIndex: 2 }}
           />
           <FilterComponent />
         </Modal>
@@ -151,6 +148,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     //marginRight: 80,
     marginLeft: 35,
+    marginTop: 5,
     width: 250,
     height: 30,
   },
