@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, Image, View, Text, TouchableOpacity } from "react-native";
 import { db } from "../../firebase.config";
-import { getDoc, doc } from "firebase/firestore";
+import { getDoc, setDoc, doc } from "firebase/firestore";
 
 type props = {
   image: any;
@@ -23,17 +23,26 @@ export default function Card({ image, id, onPress }: props) {
       setOpen(docSnap.data().open);
       setClose(docSnap.data().close);
       setDistance(docSnap.data().distance);
+      setFavorited(docSnap.data().favorited);
     }
   });
 
   const today = new Date();
   const currHour = today.getHours();
   const isOpen = currHour >= open && currHour < close;
-  const openStr = open > 12 ? open - 12 + "am" : open + "pm";
-  const closeStr = close > 12 ? close - 12 + "am" : close + "pm";
+  const openStr = open > 12 ? open - 12 + "pm" : open + "am";
+  const closeStr = close > 12 ? close - 12 + "pm" : close + "am";
 
   const handleFavorite = () => {
-    setFavorited(!favorited);
+    setDoc(docRef, {
+      name: name,
+      open: open,
+      close: close,
+      distance: distance,
+      favorited: !favorited,
+    }).then(() => {
+      setFavorited(!favorited);
+    });
   };
 
   return (
@@ -77,7 +86,7 @@ export default function Card({ image, id, onPress }: props) {
           </View>
         </View>
         <Text style={styles.timeLabel}>
-          {isOpen ? "Open" : "Closed"} until {isOpen ? openStr : closeStr}
+          {isOpen ? "Open" : "Closed"} until {isOpen ? closeStr : openStr}
         </Text>
       </View>
     </TouchableOpacity>
