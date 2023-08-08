@@ -32,10 +32,17 @@ export default function QueueStatus({ navigation }: QueueStatusProps) {
 
   const joinQueue = () => {
     const joinedAt = Date.now();
-    setDoc(doc(db, "queue", user.id ? user.id : ""), {
-      email: user.email,
-      joinedAt: joinedAt,
-    });
+    setDoc(
+      doc(
+        db,
+        "dining-halls/community-dining-center/queue",
+        user.id ? user.id : ""
+      ),
+      {
+        email: user.email,
+        joinedAt: joinedAt,
+      }
+    );
     navigation.navigate("WaitingLine", { time: joinedAt });
   };
 
@@ -57,7 +64,10 @@ export default function QueueStatus({ navigation }: QueueStatusProps) {
       </Text>
       <Text style={styles.staticText}>
         Estimate wait times:
-        <Text style={styles.dynamicText}> 15 minutes</Text>
+        <Text style={styles.dynamicText}>
+          {" "}
+          {QueueCount()} {QueueCount() == 1 ? "minute" : "minutes"}
+        </Text>
       </Text>
       <Text style={styles.subtitle}>If you join the queue now</Text>
       <View style={{ marginBottom: 10 }}>
