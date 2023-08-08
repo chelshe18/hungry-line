@@ -54,11 +54,11 @@ export default function Dining({ navigation }: DiningProps) {
           source={require("../assets/profile.png")}
         />
         <Text style={styles.welcomeText}>
-          Welcome {auth.currentUser?.displayName}
+          Welcome, {auth.currentUser?.displayName}!
         </Text>
       </View>
       <View style={styles.bottom}>
-        <View style={{ flexDirection: "row" }}>
+        <View style={{ flexDirection: "row", justifyContent: "center" }}>
           <View style={styles.searchBarContainer}>
             {/* <SearchBar
                         placeholder="Search Dining and Menus"
@@ -74,7 +74,7 @@ export default function Dining({ navigation }: DiningProps) {
             onPress={() => {
               setModalOpen(true);
             }}
-            style={{ paddingLeft: 10 }}
+            style={{ padding: 7 }}
           />
         </View>
 
@@ -84,7 +84,7 @@ export default function Dining({ navigation }: DiningProps) {
               key={id}
               id={id}
               image={images.get(id)}
-              onPress={() => navigation.navigate("QueueStatus")}
+              onPress={() => navigation.navigate("QueueStatus", { hallId: id })}
             />
           ))}
         </ScrollView>
@@ -97,7 +97,7 @@ export default function Dining({ navigation }: DiningProps) {
             onPress={() => {
               setModalOpen(false);
             }}
-            style={{ position: "absolute", top: 422, left: 11, zIndex: 2 }}
+            style={{ position: "absolute", bottom: 225, left: 11, zIndex: 2 }}
           />
           <FilterComponent />
         </Modal>
@@ -144,10 +144,8 @@ const styles = StyleSheet.create({
   searchBarContainer: {
     borderRadius: 15,
     backgroundColor: "#F7E1AE",
-    display: "flex",
     flexDirection: "row",
     //marginRight: 80,
-    marginLeft: 35,
     marginTop: 5,
     width: 250,
     height: 30,

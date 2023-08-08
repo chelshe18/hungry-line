@@ -20,8 +20,8 @@ export type RootStackParamList = {
   Hungryline: undefined;
   Login: undefined;
   Registration: undefined;
-  QueueStatus: undefined;
-  WaitingLine: { time: number };
+  QueueStatus: { hallId: string };
+  WaitingLine: { hallId: string; time: number };
   Dining: undefined;
   Notification: undefined;
   QueueTracking: undefined;

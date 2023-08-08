@@ -23,7 +23,8 @@ type WaitingLineProps = NativeStackScreenProps<
 >;
 
 export default function WaitingLine({ navigation, route }: WaitingLineProps) {
-  const totalPeople = QueueCount(); // total number of people in the queue
+  const hallId = route.params.hallId;
+  const totalPeople = QueueCount(hallId); // total number of people in the queue
   const [waitingPeople, setWaitingPeople] = useState<number>(0); // people ahead of you
   const [progress, setProgress] = useState<number>(0);
   const auth = FIREBASE_AUTH;
@@ -34,62 +35,49 @@ export default function WaitingLine({ navigation, route }: WaitingLineProps) {
   };
   const [firstInQueue, setFirstInQueue] = useState("");
 
-  onSnapshot(
-    collection(db, "dining-halls/community-dining-center/queue"),
-    (snapshot) => {
-      let timestamps: number[] = [];
-      snapshot.docs.forEach((doc) => {
-        timestamps.push({ ...doc.data() }.joinedAt);
-      });
+  onSnapshot(collection(db, "dining-halls", hallId, "queue"), (snapshot) => {
+    let timestamps: number[] = [];
+    snapshot.docs.forEach((doc) => {
+      timestamps.push({ ...doc.data() }.joinedAt);
+    });
 
-      // Find the first person in the queue
-      const q = query(
-        collection(db, "dining-halls/community-dining-center/queue"),
-        where("joinedAt", "==", Math.min.apply(Math, timestamps))
-      );
-      getDocs(q).then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          setFirstInQueue(doc.id);
-        });
+    // Find the first person in the queue
+    const q = query(
+      collection(db, "dining-halls", hallId, "queue"),
+      where("joinedAt", "==", Math.min.apply(Math, timestamps))
+    );
+    getDocs(q).then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        setFirstInQueue(doc.id);
       });
+    });
 
-      // Find number of people in front of you in the queue
-      const waiting_query = query(
-        collection(db, "dining-halls/community-dining-center/queue"),
-        where("joinedAt", "<", user.joinedAt)
-      );
-      getDocs(waiting_query).then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          setWaitingPeople(querySnapshot.size);
-          setProgress((totalPeople - querySnapshot.size) / totalPeople);
-        });
+    // Find number of people in front of you in the queue
+    const waiting_query = query(
+      collection(db, "dining-halls", hallId, "queue"),
+      where("joinedAt", "<", user.joinedAt)
+    );
+    getDocs(waiting_query).then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        setWaitingPeople(querySnapshot.size);
+        setProgress((totalPeople - querySnapshot.size) / totalPeople);
       });
-    }
-  );
+    });
+  });
 
   // If user is the first in the queue
   if (user.id == firstInQueue) {
     // Run after 10 seconds for demo
     setTimeout(() => {
       deleteDoc(
-        doc(
-          db,
-          "dining-halls/community-dining-center/queue",
-          user.id ? user.id : ""
-        )
+        doc(db, "dining-halls", hallId, "queue", user.id ? user.id : "")
       );
       navigation.navigate("Notification");
     }, 10000);
   }
 
   const handlePress = () => {
-    deleteDoc(
-      doc(
-        db,
-        "dining-halls/community-dining-center/queue",
-        user.id ? user.id : ""
-      )
-    );
+    deleteDoc(doc(db, "dining-halls", hallId, "queue", user.id ? user.id : ""));
     navigation.pop();
   };
 
