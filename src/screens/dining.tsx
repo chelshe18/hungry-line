@@ -34,6 +34,7 @@ export default function Dining({ navigation }: DiningProps) {
   ]);
   const ids: string[] = [];
 
+  // When implementing the filter component, adjust this query?
   const q = query(collection(db, "dining-halls"));
   getDocs(q)
     .then((querySnapshot) => {
