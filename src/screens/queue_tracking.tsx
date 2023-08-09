@@ -3,7 +3,14 @@ import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../App";
-import { collection, query, where, getDocs, setDoc, doc } from "firebase/firestore";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  setDoc,
+  doc,
+} from "firebase/firestore";
 import { db } from "../../firebase.config";
 import { generate } from "random-words";
 import Ellipse from "../components/ellipse";
@@ -18,8 +25,16 @@ export default function QueueTracking({ navigation, route }: QueueTrackingProps)
   const secretCode = String(generate());
 
   setDoc(doc(db, "dining-halls", route.params.hallId, "codes", secretCode), {
-    code: secretCode
+    code: secretCode,
   });
+
+  // Go back to dining screen after 20 seconds
+  setTimeout(() => {
+    navigation.reset({
+      index: 0,
+      routes: [{ name: "Dining" }],
+    });
+  }, 20000);
 
   return (
     <View style={styles.container}>
