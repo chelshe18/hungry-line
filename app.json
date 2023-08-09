@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "Dumpling Divas",
-    "slug": "dumpling-divas",
-    "scheme": "dumpling-divas",
+    "name": "Hungry Line",
+    "slug": "hungry-line",
+    "scheme": "hungry-line",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./src/assets/icon.png",
