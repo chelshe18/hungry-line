@@ -1,25 +1,15 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  Image,
-  Modal,
-  TextInput,
-} from "react-native";
+import { StyleSheet, Text, View, ScrollView, Image, Modal } from "react-native";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../App";
 import { FIREBASE_AUTH, db } from "../../firebase.config";
 import { Ionicons } from "@expo/vector-icons";
 import Yellow from "../components/yellow_ellipse";
-import Filter from "../components/filter_button";
 import { SearchBar } from "react-native-screens";
 import FilterComponent from "../components/filter_compon";
 import Card from "../components/card";
-import Button from "../components/button";
 
 type DiningProps = NativeStackScreenProps<RootStackParamList, "Dining">;
 

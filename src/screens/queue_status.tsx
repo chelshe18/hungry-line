@@ -6,16 +6,7 @@ import { RootStackParamList } from "../App";
 import { FIREBASE_AUTH, db } from "../../firebase.config";
 import Ellipse from "../components/ellipse";
 import Button from "../components/button";
-import WaitingLine from "./waiting_line";
-import {
-  collection,
-  setDoc,
-  getDoc,
-  doc,
-  getCountFromServer,
-  QueryDocumentSnapshot,
-  QuerySnapshot,
-} from "firebase/firestore";
+import { setDoc, getDoc, doc } from "firebase/firestore";
 import QueueCount from "../components/queue_count";
 
 type QueueStatusProps = NativeStackScreenProps<
@@ -39,19 +30,10 @@ export default function QueueStatus({ navigation, route }: QueueStatusProps) {
 
   const joinQueue = () => {
     const joinedAt = Date.now();
-    setDoc(
-      doc(
-        db,
-        "dining-halls",
-        hallId,
-        "queue",
-        user.id ? user.id : ""
-      ),
-      {
-        email: user.email,
-        joinedAt: joinedAt,
-      }
-    );
+    setDoc(doc(db, "dining-halls", hallId, "queue", user.id ? user.id : ""), {
+      email: user.email,
+      joinedAt: joinedAt,
+    });
     navigation.navigate("WaitingLine", {
       hallId: hallId,
       time: joinedAt,
@@ -70,16 +52,12 @@ export default function QueueStatus({ navigation, route }: QueueStatusProps) {
     <View style={styles.container}>
       <Ellipse />
       <Text style={styles.heading}>{hallName}</Text>
-      <Image
-        style={styles.image}
-        source={images.get(hallId)}
-      />
+      <Image style={styles.image} source={images.get(hallId)} />
       <Text style={styles.midText}>
         There {QueueCount(hallId) == 1 ? "is" : "are"} currently
         <Text style={{ color: "#CF4F4F" }}>
           {" "}
-          {QueueCount(hallId)}{" "}
-          {QueueCount(hallId) == 1 ? "person" : "people"}{" "}
+          {QueueCount(hallId)} {QueueCount(hallId) == 1 ? "person" : "people"}{" "}
         </Text>
         ahead of you in the queue.
       </Text>
@@ -87,8 +65,7 @@ export default function QueueStatus({ navigation, route }: QueueStatusProps) {
         Estimate wait times:
         <Text style={styles.dynamicText}>
           {" "}
-          {QueueCount(hallId)}{" "}
-          {QueueCount(hallId) == 1 ? "minute" : "minutes"}
+          {QueueCount(hallId)} {QueueCount(hallId) == 1 ? "minute" : "minutes"}
         </Text>
       </Text>
       <Text style={styles.subtitle}>If you join the queue now</Text>

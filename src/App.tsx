@@ -23,8 +23,8 @@ export type RootStackParamList = {
   QueueStatus: { hallId: string };
   WaitingLine: { hallId: string; time: number };
   Dining: undefined;
-  Notification: undefined;
-  QueueTracking: undefined;
+  Notification: { hallId: string };
+  QueueTracking: { hallId: string };
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
