@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../App";
@@ -66,19 +66,24 @@ export default function WaitingLine({ navigation, route }: WaitingLineProps) {
   });
 
   // If user is the first in the queue
-  if (user.id == firstInQueue) {
-    // Run after 10 seconds for demo
-    setTimeout(() => {
-      deleteDoc(
-        doc(db, "dining-halls", hallId, "queue", user.id ? user.id : "")
-      );
-      navigation.navigate("Notification");
-    }, 10000);
-  }
+  var timer: any;
+  useEffect(() => {
+    if (user.id == firstInQueue) {
+      // Run after 10 seconds for demo
+      timer = setTimeout(() => {
+        deleteDoc(
+          doc(db, "dining-halls", hallId, "queue", user.id ? user.id : "")
+        ).then(() => {
+          navigation.navigate("Notification", { hallId: hallId });
+        });
+      }, 10000);
+    }
+  }, [firstInQueue]);
 
   const handlePress = () => {
     deleteDoc(doc(db, "dining-halls", hallId, "queue", user.id ? user.id : ""));
     navigation.pop();
+    clearTimeout(timer);
   };
 
   return (
@@ -103,12 +108,6 @@ export default function WaitingLine({ navigation, route }: WaitingLineProps) {
       </Text>
       <Image style={styles.image} source={require("../assets/map.png")} />
       <Button text="Quit The Queue" onPress={handlePress} />
-      <Button
-        text="TEMP BUTTON: Notification"
-        onPress={() => {
-          navigation.navigate("Notification");
-        }}
-      />
     </View>
   );
 }
