@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, ScrollView, Image, Modal } from "react-native";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
@@ -22,19 +22,21 @@ export default function Dining({ navigation }: DiningProps) {
     ["downtown-hall", require("../assets/dining_hall_2.jpg")],
     ["dumpling-dining-center", require("../assets/dining_hall_3.jpg")],
   ]);
-  const ids: string[] = [];
 
-  // When implementing the filter component, adjust this query?
-  const q = query(collection(db, "dining-halls"));
-  getDocs(q)
-    .then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        ids.push(doc.id);
+  useEffect(() => {
+    const ids: string[] = [];
+    // When implementing the filter component, adjust this query?
+    const q = query(collection(db, "dining-halls"));
+    getDocs(q)
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          ids.push(doc.id);
+        });
+      })
+      .then(() => {
+        setIdArray(ids);
       });
-    })
-    .then(() => {
-      setIdArray(ids);
-    });
+  }, []);
 
   return (
     <View style={styles.container}>
