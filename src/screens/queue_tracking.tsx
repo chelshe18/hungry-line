@@ -3,8 +3,8 @@ import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../App";
+import { generate } from "random-words";
 import Ellipse from "../components/ellipse";
-import Button from "../components/button";
 import * as Progress from "react-native-progress";
 
 type QueueTrackingProps = NativeStackScreenProps<
@@ -27,7 +27,7 @@ export default function QueueTracking({ navigation }: QueueTrackingProps) {
         borderRadius={10}
         unfilledColor={"#617A55"}
       />
-      <Text style={styles.secretText}>Secret Code: butter</Text>
+      <Text style={styles.secretText}>Secret Code: {generate()}</Text>
       <Text style={styles.midText}>
         {" "}
         Please show the dinning hall staff this confirmation page and tell them
