@@ -3,8 +3,17 @@ import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../App";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  setDoc,
+  doc,
+} from "firebase/firestore";
+import { db } from "../../firebase.config";
+import { generate } from "random-words";
 import Ellipse from "../components/ellipse";
-import Button from "../components/button";
 import * as Progress from "react-native-progress";
 
 type QueueTrackingProps = NativeStackScreenProps<
@@ -12,7 +21,21 @@ type QueueTrackingProps = NativeStackScreenProps<
   "QueueTracking"
 >;
 
-export default function QueueTracking({ navigation }: QueueTrackingProps) {
+export default function QueueTracking({ navigation, route }: QueueTrackingProps) {
+  const secretCode = String(generate());
+
+  setDoc(doc(db, "dining-halls", route.params.hallId, "codes", secretCode), {
+    code: secretCode,
+  });
+
+  // Go back to dining screen after 20 seconds
+  setTimeout(() => {
+    navigation.reset({
+      index: 0,
+      routes: [{ name: "Dining" }],
+    });
+  }, 20000);
+
   return (
     <View style={styles.container}>
       <Ellipse />
@@ -27,7 +50,7 @@ export default function QueueTracking({ navigation }: QueueTrackingProps) {
         borderRadius={10}
         unfilledColor={"#617A55"}
       />
-      <Text style={styles.secretText}>Secret Code: butter</Text>
+      <Text style={styles.secretText}>Secret Code: {secretCode}</Text>
       <Text style={styles.midText}>
         {" "}
         Please show the dinning hall staff this confirmation page and tell them

@@ -1,25 +1,15 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  Image,
-  Modal,
-  TextInput,
-} from "react-native";
+import React, { useState, useEffect } from "react";
+import { StyleSheet, Text, View, ScrollView, Image, Modal } from "react-native";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../App";
 import { FIREBASE_AUTH, db } from "../../firebase.config";
 import { Ionicons } from "@expo/vector-icons";
 import Yellow from "../components/yellow_ellipse";
-import Filter from "../components/filter_button";
 import { SearchBar } from "react-native-screens";
 import FilterComponent from "../components/filter_compon";
 import Card from "../components/card";
-import Button from "../components/button";
 
 type DiningProps = NativeStackScreenProps<RootStackParamList, "Dining">;
 
@@ -32,19 +22,21 @@ export default function Dining({ navigation }: DiningProps) {
     ["downtown-hall", require("../assets/dining_hall_2.jpg")],
     ["dumpling-dining-center", require("../assets/dining_hall_3.jpg")],
   ]);
-  const ids: string[] = [];
 
-  // When implementing the filter component, adjust this query?
-  const q = query(collection(db, "dining-halls"));
-  getDocs(q)
-    .then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        ids.push(doc.id);
+  useEffect(() => {
+    const ids: string[] = [];
+    // When implementing the filter component, adjust this query?
+    const q = query(collection(db, "dining-halls"));
+    getDocs(q)
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          ids.push(doc.id);
+        });
+      })
+      .then(() => {
+        setIdArray(ids);
       });
-    })
-    .then(() => {
-      setIdArray(ids);
-    });
+  }, []);
 
   return (
     <View style={styles.container}>

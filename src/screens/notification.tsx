@@ -14,8 +14,9 @@ type NotificationProps = NativeStackScreenProps<
   "Notification"
 >;
 
-export default function Notification({ navigation }: NotificationProps) {
+export default function Notification({ navigation, route }: NotificationProps) {
   const auth = FIREBASE_AUTH;
+  const hallId = route.params.hallId;
 
   return (
     <View style={styles.container}>
@@ -27,13 +28,13 @@ export default function Notification({ navigation }: NotificationProps) {
       </Text>
       <Timer
         onFinish={() => {
-          navigation.navigate("QueueStatus");
+          navigation.navigate("QueueStatus", { hallId: hallId });
         }}
       />
       <Button
         text="Here"
         onPress={() => {
-          navigation.navigate("QueueTracking");
+          navigation.navigate("QueueTracking", { hallId: hallId });
         }}
       />
     </View>
