@@ -6,8 +6,9 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../App";
 import { FIREBASE_AUTH, db } from "../../firebase.config";
 import { Ionicons } from "@expo/vector-icons";
-import Yellow from "../components/yellow_ellipse";
 import { SearchBar } from "react-native-screens";
+import Yellow from "../components/yellow_ellipse";
+import Filter from "../components/filter_button";
 import FilterComponent from "../components/filter_compon";
 import Card from "../components/card";
 
@@ -25,7 +26,6 @@ export default function Dining({ navigation }: DiningProps) {
 
   useEffect(() => {
     const ids: string[] = [];
-    // When implementing the filter component, adjust this query?
     const q = query(collection(db, "dining-halls"));
     getDocs(q)
       .then((querySnapshot) => {
@@ -52,13 +52,9 @@ export default function Dining({ navigation }: DiningProps) {
       </View>
       <View style={styles.bottom}>
         <View style={{ flexDirection: "row", justifyContent: "center" }}>
-          <View style={styles.searchBarContainer}>
-            {/* <SearchBar
-                        placeholder="Search Dining and Menus"
-                        onChangeText={this.updateSearch}
-                        value={search}> */}
-            <Ionicons name="search" size={22} style={{ padding: 3 }} />
-            {/* </SearchBar> */}
+          <View style={styles.searchBarContainer}>            
+            <Ionicons name="search" size={22} style={{ padding: 4 }} />
+            <TextInput placeholder="Search Dining and Menus"></TextInput>
           </View>
           <Ionicons
             name="filter"
