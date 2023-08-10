@@ -16,10 +16,9 @@ import { FIREBASE_AUTH, db } from "../../firebase.config";
 import { Ionicons } from "@expo/vector-icons";
 import Yellow from "../components/yellow_ellipse";
 import Filter from "../components/filter_button";
-import { SearchBar } from "react-native-screens";
 import FilterComponent from "../components/filter_compon";
 import Card from "../components/card";
-import Button from "../components/button";
+import { SearchBar } from "react-native-screens";
 
 type DiningProps = NativeStackScreenProps<RootStackParamList, "Dining">;
 
@@ -33,7 +32,6 @@ export default function Dining({ navigation }: DiningProps) {
     ["dumpling-dining-center", require("../assets/dining_hall_3.jpg")],
   ]);
   const ids: string[] = [];
-
   // When implementing the filter component, adjust this query?
   const q = query(collection(db, "dining-halls"));
   getDocs(q)
@@ -45,7 +43,6 @@ export default function Dining({ navigation }: DiningProps) {
     .then(() => {
       setIdArray(ids);
     });
-
   return (
     <View style={styles.container}>
       <View style={styles.top}>
@@ -60,13 +57,9 @@ export default function Dining({ navigation }: DiningProps) {
       </View>
       <View style={styles.bottom}>
         <View style={{ flexDirection: "row", justifyContent: "center" }}>
-          <View style={styles.searchBarContainer}>
-            {/* <SearchBar
-                        placeholder="Search Dining and Menus"
-                        onChangeText={this.updateSearch}
-                        value={search}> */}
-            <Ionicons name="search" size={22} style={{ padding: 3 }} />
-            {/* </SearchBar> */}
+          <View style={styles.searchBarContainer}>            
+            <Ionicons name="search" size={22} style={{ padding: 4 }} />
+            <TextInput placeholder="Search Dining and Menus"></TextInput>
           </View>
           <Ionicons
             name="filter"
