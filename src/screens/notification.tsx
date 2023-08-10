@@ -6,7 +6,6 @@ import { RootStackParamList } from "../App";
 import { FIREBASE_AUTH } from "../../firebase.config";
 import Timer from "../components/timer";
 import Ellipse from "../components/ellipse";
-import { Colors } from "react-native/Libraries/NewAppScreen";
 import Button from "../components/button";
 
 type NotificationProps = NativeStackScreenProps<

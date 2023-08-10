@@ -1,13 +1,8 @@
 # Hungry Line
 
-## Story Board
+## Technology Used:
 
-![alt text](src/assets/storyboardfig.png)
-![alt text](src/assets/storyboard.png)
-
-This depicts the life of an average college student attending a relatively large college, where the dining halls frequently become crowded during peak hours. Each day, he has a 90-minute gap between his classes allocated for lunch and studying, which he initially believes is ample time. He intends to complete some school assignments after his meal. However, on a daily basis, upon entering the dining hall, he is confronted with lengthy lines, sometimes spending up to an hour waiting. This leaves him with limited eating time and no opportunity to focus on his tasks. As this pattern continues during dinner hours, he realizes that, given his other commitments, dedicating a total of 4 hours a day for meals leaves him unable to complete all his work. Consequently, he gradually shifts his diet to quick and convenient options like granola bars and chips.
-
-Through our research and interviews, we have identified time as the most significant barrier to maintaining a healthy diet among college students. Time holds immense value for these students. Our interviewees unanimously reported accomplishing minimal to no productive work while standing in dining hall lines. Nonetheless, dining halls remain the most accessible source of nutritious meals for students. In light of these findings, we have resolved to address this obstacle.
+React Native and Expo
 
 ## About Hungry Line
 
@@ -21,3 +16,34 @@ Through our research and interviews, we have identified time as the most signifi
 We utilized Figma to design our application and opted for a warm color palette to evoke sensations of comfort and coziness. This choice aligns with our objective of creating an environment where users feel at home while navigating through our app.
 
 ## Demo
+
+## Available Scripts
+
+To run the app, download the Expo app on the App Store or Google Play Store. In the project directory, you can run the command corresponding to your package manager:
+
+> yarn start, expo start, npm start
+
+Runs the app in the development mode through Expo, a React Native framework.
+
+### Viewing App on iOS Device
+
+Running any of the commands above opens up Expo Developer Tools. Scan the QR code that appears to build the project on your device.
+
+- Step 1 : Download Expo Client App
+- Step 2 : Open Camera Application and scan QR Code
+Viewing App on Android Device
+
+Running any of the commands above opens up Expo Developer Tools.
+
+- Step 1: Download Expo client app
+- Step 2: Navigate to Expo app and scan QR Code from Expo Developer Tools
+Viewing App on Android Emulator
+
+Running any of the commands above opens up Expo Developer Tools.
+
+- Step 1 : Navigate to Android Studio and start emulator from AVD Manager
+- Step 2 : Run expo start in the project directory
+- Step 3 : Once Expo Developer Tools opens, select option "run on Android Emulator"
+Credits
+
+> Hungry Line is a project created by Maggie Chen, Chelsea He-Chen, Chenlu Wang, and Anh Tran during the summer of 2023 in participation of SEEDS (​Summer Environmental Education Development Program).
