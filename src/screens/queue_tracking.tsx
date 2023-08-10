@@ -3,14 +3,7 @@ import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../App";
-import {
-  collection,
-  query,
-  where,
-  getDocs,
-  setDoc,
-  doc,
-} from "firebase/firestore";
+import { setDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase.config";
 import { generate } from "random-words";
 import Ellipse from "../components/ellipse";
@@ -21,7 +14,10 @@ type QueueTrackingProps = NativeStackScreenProps<
   "QueueTracking"
 >;
 
-export default function QueueTracking({ navigation, route }: QueueTrackingProps) {
+export default function QueueTracking({
+  navigation,
+  route,
+}: QueueTrackingProps) {
   const secretCode = String(generate());
 
   setDoc(doc(db, "dining-halls", route.params.hallId, "codes", secretCode), {
