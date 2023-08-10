@@ -1,5 +1,5 @@
 {
-  "name": "dumpling-divas",
+  "name": "hungry-line",
   "version": "1.0.0",
   "main": "src/index.ts",
   "scripts": {
@@ -20,6 +20,7 @@
     "expo-status-bar": "~1.6.0",
     "firebase": "^10.1.0",
     "formik": "^2.4.2",
+    "random-words": "^2.0.0",
     "react": "18.2.0",
     "react-native": "0.72.3",
     "react-native-countdown-component": "github:chelshe18/react-native-countdown-component",
