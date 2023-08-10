@@ -16,9 +16,10 @@ Hungry Line is a React Native app designed for use on devices like iOS and Andro
 
 ## Technologies
 
-- React Native
-- Expo
-- Firebase
+- Typescript version: 5.1.3
+- React Native version: 0.72.3
+- Expo version: 49.0.5
+- Firebase version: 10.1.0
 
 ## Design
 
