@@ -1,15 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, ScrollView, Image, Modal, TextInput } from "react-native";
-<<<<<<< HEAD
-<<<<<<< HEAD
-import { collection, query, where, getDocs } from "firebase/firestore";
-=======
 import { collection, query, getDocs } from "firebase/firestore";
->>>>>>> origin
-=======
-import { collection, query, where, getDocs } from "firebase/firestore";
->>>>>>> 92c7b888eac824373d7c71ad3608b0f973373e94
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../App";
 import { FIREBASE_AUTH, db } from "../../firebase.config";
