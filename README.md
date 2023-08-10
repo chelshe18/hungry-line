@@ -1,49 +1,41 @@
 # Hungry Line
 
-## Technology Used:
+Hungry Line is a mobile app that provides a way to join dining hall queues online.
 
-React Native and Expo
+## Table of Contents
+- [Overview](#overview)
+- [Technologies](#technologies)
+- [Design](#design)
+- [App Demo](#app-demo)
+- [Installation and Setup](#installation-and-setup)
+- [Credits](#credits)
 
-## About Hungry Line
+## Overview
 
-"Hungry Line" is a React Native app designed for use on devices like iOS and Android. This app offers users the ability to queue online. It enables users to seamlessly join a dining hall line from any location and grants access to the dining hall when their turn arrives. This approach provides users with additional time for traveling to the dining hall and being more productive during the waiting period.
+Hungry Line is a React Native app designed for use on devices like iOS and Android. This app moves all of the time students spend waiting to eat in a dining hall to an online queue. It enables users to seamlessly join a dining hall line from any location and grants access to the dining hall when their turn arrives. This approach provides users with additional time for traveling to the dining hall and being more productive during the waiting period.
 
-## Figma
+## Technologies
 
-![alt text](src/assets/figma1.png)
-![alt text](src/assets/figma2.png)
+- React Native
+- Expo
+- Firebase
 
-We utilized Figma to design our application and opted for a warm color palette to evoke sensations of comfort and coziness. This choice aligns with our objective of creating an environment where users feel at home while navigating through our app.
+## Design
 
-## Demo
+See our Figma design [here](https://www.figma.com/file/76P9CTxxifZFAWDR8xCGJ3/design?type=design&node-id=0%3A1&mode=design&t=bwfgtX1t4aCORhCr-1).
 
-## Available Scripts
+We opted for a warm color palette to evoke sensations of comfort and coziness. This choice aligns with our objective of creating an environment where users feel at home while navigating through our app.
 
-To run the app, download the Expo app on the App Store or Google Play Store. In the project directory, you can run the command corresponding to your package manager:
+## App Demo
 
-> yarn start, expo start, npm start
+## Installation and Setup
 
-Runs the app in the development mode through Expo, a React Native framework.
+To run the app, download the Expo Go app on the App Store or Google Play Store, then connect to the same network as your computer. In the project directory, run the command corresponding to your package manager:
 
-### Viewing App on iOS Device
+```npx expo start``` or ```yarn expo start```
 
-Running any of the commands above opens up Expo Developer Tools. Scan the QR code that appears to build the project on your device.
+On Android, use the Expo Go app to scan the QR code from your terminal to open your project. On iOS, use the built-in QR code scanner of the default iOS Camera app.
 
-- Step 1 : Download Expo Client App
-- Step 2 : Open Camera Application and scan QR Code
-Viewing App on Android Device
+## Credits
 
-Running any of the commands above opens up Expo Developer Tools.
-
-- Step 1: Download Expo client app
-- Step 2: Navigate to Expo app and scan QR Code from Expo Developer Tools
-Viewing App on Android Emulator
-
-Running any of the commands above opens up Expo Developer Tools.
-
-- Step 1 : Navigate to Android Studio and start emulator from AVD Manager
-- Step 2 : Run expo start in the project directory
-- Step 3 : Once Expo Developer Tools opens, select option "run on Android Emulator"
-Credits
-
-> Hungry Line is a project created by Maggie Chen, Chelsea He-Chen, Chenlu Wang, and Anh Tran during the summer of 2023 in participation of SEEDS (​Summer Environmental Education Development Program).
+Hungry Line is a project created by Maggie Chen, Chelsea He-Chen, Chenlu Wang, and Anh Tran during the summer of 2023 in participation of SEEDS (​Summer Environmental Education Development Program).
