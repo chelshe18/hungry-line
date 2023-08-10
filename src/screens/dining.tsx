@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, ScrollView, Image, Modal } from "react-native";
+import { StyleSheet, Text, View, ScrollView, Image, Modal, TextInput } from "react-native";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../App";
