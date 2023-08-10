@@ -6,9 +6,7 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../App";
 import { FIREBASE_AUTH, db } from "../../firebase.config";
 import { Ionicons } from "@expo/vector-icons";
-import { SearchBar } from "react-native-screens";
 import Yellow from "../components/yellow_ellipse";
-import Filter from "../components/filter_button";
 import FilterComponent from "../components/filter_compon";
 import Card from "../components/card";
 
@@ -78,7 +76,6 @@ export default function Dining({ navigation }: DiningProps) {
           ))}
         </ScrollView>
 
-        {/* <Filter /> */}
         <Modal visible={modalOpen} animationType="slide" transparent={true}>
           <Ionicons
             name="close"
